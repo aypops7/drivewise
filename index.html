@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DriveWise — Car Acquisition Cost Analyzer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<!-- ============================================================
+     HEADER
+     ============================================================ -->
+<header class="header">
+  <div class="logo">
+    <div class="logo-icon">&#x1F697;</div>
+    <div>
+      <div class="logo-name">DriveWise</div>
+      <div class="logo-tagline">Car Acquisition Cost Analyzer</div>
+    </div>
+  </div>
+  <div class="header-right">
+    <span class="header-note">Results update live</span>
+    <span class="header-badge">&#x26A1; Live Calculator</span>
+  </div>
+</header>
+
+<!-- ============================================================
+     MAIN LAYOUT
+     ============================================================ -->
+<main class="main">
+
+  <!-- ========================
+       LEFT — INPUTS
+       ======================== -->
+  <div class="inputs-row">
+
+    <!-- 1. Vehicle Assumptions -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon indigo">&#x1F697;</div>
+        <span class="card-title">Vehicle Assumptions</span>
+      </div>
+      <div class="card-body">
+        <div class="input-grid">
+          <div class="field">
+            <label>New Car Price
+              <span class="tip" data-tip="MSRP or agreed selling price, before tax and fees">?</span>
+            </label>
+            <div class="input-wrap has-pre">
+              <span class="pre">$</span>
+              <input type="number" id="newCarPrice" value="45000" />
+            </div>
+          </div>
+          <div class="field">
+            <label>Used Car Price</label>
+            <div class="input-wrap has-pre">
+              <span class="pre">$</span>
+              <input type="number" id="usedCarPrice" value="28000" />
+            </div>
+          </div>
+          <div class="field">
+            <label>Sales Tax
+              <span class="tip" data-tip="Applied to the purchase price of both new and used cars">?</span>
+            </label>
+            <div class="input-wrap has-suf">
+              <span class="suf">%</span>
+              <input type="number" id="salesTax" value="7.5" step="0.1" />
+            </div>
+          </div>
+          <div class="field">
+            <label>Fees
+              <span class="tip" data-tip="Title, doc fees, dealer fees — applied to all purchase options">?</span>
+            </label>
+            <div class="input-wrap has-pre">
+              <span class="pre">$</span>
+              <input type="number" id="fees" value="1200" />
+            </div>
+          </div>
+          <div class="field">
+            <label>Horizon
+              <span class="tip" data-tip="How many years you plan to keep or compare the vehicle">?</span>
+            </label>
+            <div class="input-wrap has-suf">
+              <span class="suf">yrs</span>
+              <input type="number" id="horizonYears" value="5" min="1" max="20" />
+            </div>
+          </div>
+          <div class="field">
+            <label>Miles / Year</label>
+            <div class="input-wrap">
+              <input type="number" id="annualMiles" value="12000" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Cash & Resale -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon green">&#x1F4B0;</div>
+        <span class="card-title">Cash &amp; Resale Values</span>
+      </div>
+      <div class="card-body">
+        <div class="input-grid">
+          <div class="field span-2">
+            <label>Cash Available Today
+              <span class="tip" data-tip="Total liquid savings you could deploy for this purchase. Unspent cash is assumed to be invested at your expected return.">?</span>
+            </label>
+            <div class="input-wrap has-pre">
+              <span class="pre">$</span>
+              <input type="number" id="cashAvailable" value="50000" />
+            </div>
+          </div>
+          <div class="field">
+            <label>New Car Resale
+              <span class="tip" data-tip="Estimated value when you sell or trade in at end of horizon">?</span>
+            </label>
+            <div class="input-wrap has-pre">
+              <span class="pre">$</span>
+              <input type="number" id="newCarResale" value="22000" />
+            </div>
+          </div>
+          <div class="field">
+            <label>Used Car Resale</label>
+            <div class="input-wrap has-pre">
+              <span class="pre">$</span>
+              <input type="number" id="usedCarResale" value="12000" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Financing -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon amber">&#x1F3E6;</div>
+        <span class="card-title">Financing Assumptions</span>
+      </div>
+      <div class="card-body">
+        <div class="input-grid">
+          <div class="field">
+            <label>Down Payment</label>
+            <div class="input-wrap has-pre">
+              <span class="pre">$</span>
+              <input type="number" id="downPayment" value="5000" />
+            </div>
+          </div>
+          <div class="field">
+            <label>Loan APR
+              <span class="tip" data-tip="Annual percentage rate on the auto loan">?</span>
+            </label>
+            <div class="input-wrap has-suf">
+              <span class="suf">%</span>
+              <input type="number" id="loanAPR" value="6.5" step="0.1" />
+            </div>
+          </div>
+          <div class="field span-2">
+            <label>Loan Term
+              <span class="tip" data-tip="Common terms: 48, 60, 72, or 84 months">?</span>
+            </label>
+            <div class="input-wrap has-suf">
+              <span class="suf">mo</span>
+              <input type="number" id="loanTermMonths" value="60" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. Lease -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon purple">&#x1F4CB;</div>
+        <span class="card-title">Lease Assumptions</span>
+      </div>
+      <div class="card-body">
+        <div class="input-grid">
+          <div class="field">
+            <label>Monthly Payment</label>
+            <div class="input-wrap has-pre">
+              <span class="pre">$</span>
+              <input type="number" id="leaseMonthly" value="549" />
+            </div>
+          </div>
+          <div class="field">
+            <label>Due at Signing
+              <span class="tip" data-tip="First month + security deposit + acquisition fee paid upfront">?</span>
+            </label>
+            <div class="input-wrap has-pre">
+              <span class="pre">$</span>
+              <input type="number" id="dueAtSigning" value="3500" />
+            </div>
+          </div>
+          <div class="field">
+            <label>Lease Term
+              <span class="tip" data-tip="If horizon exceeds lease term, DriveWise assumes you renew on the same terms">?</span>
+            </label>
+            <div class="input-wrap has-suf">
+              <span class="suf">mo</span>
+              <input type="number" id="leaseTermMonths" value="36" />
+            </div>
+          </div>
+          <div class="field">
+            <label>Lease-End Fee</label>
+            <div class="input-wrap has-pre">
+              <span class="pre">$</span>
+              <input type="number" id="leaseEndFee" value="395" />
+            </div>
+          </div>
+          <div class="field span-2">
+            <label>Excess Mileage / Wear (total est.)
+              <span class="tip" data-tip="Total estimated charges across the horizon for mileage overages or wear-and-tear">?</span>
+            </label>
+            <div class="input-wrap has-pre">
+              <span class="pre">$</span>
+              <input type="number" id="excessMileage" value="1200" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. Ongoing Costs -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon red">&#x2699;&#xFE0F;</div>
+        <span class="card-title">Ongoing Costs (Annual)</span>
+      </div>
+      <div class="card-body">
+        <div class="input-grid">
+          <div class="field">
+            <label>Insurance / Year</label>
+            <div class="input-wrap has-pre">
+              <span class="pre">$</span>
+              <input type="number" id="insurancePerYear" value="1800" />
+            </div>
+          </div>
+          <div class="field">
+            <label>Registration / Year</label>
+            <div class="input-wrap has-pre">
+              <span class="pre">$</span>
+              <input type="number" id="registrationPerYear" value="250" />
+            </div>
+          </div>
+          <div class="field">
+            <label>Maintenance — New
+              <span class="tip" data-tip="Annual maintenance for new or leased car (oil, tires, etc.)">?</span>
+            </label>
+            <div class="input-wrap has-pre">
+              <span class="pre">$</span>
+              <input type="number" id="maintenanceNew" value="600" />
+            </div>
+          </div>
+          <div class="field">
+            <label>Maintenance — Used
+              <span class="tip" data-tip="Older cars typically cost more to maintain. Adjust to match the vehicle age.">?</span>
+            </label>
+            <div class="input-wrap has-pre">
+              <span class="pre">$</span>
+              <input type="number" id="maintenanceUsed" value="1400" />
+            </div>
+          </div>
+        </div>
+        <p style="margin-top:0.625rem; font-size:0.7rem; color:var(--slate-400);">
+          Note: Lease option does not include a separate maintenance line — adjust if your lease requires it.
+        </p>
+      </div>
+    </div>
+
+    <!-- 6. Investment Return -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon indigo">&#x1F4C8;</div>
+        <span class="card-title">Investment Return Assumptions</span>
+      </div>
+      <div class="card-body">
+        <div class="field">
+          <label>Expected Annual Return
+            <span class="tip" data-tip="What unspent cash could earn in a diversified portfolio. This captures opportunity cost.">?</span>
+          </label>
+          <div class="input-wrap has-suf">
+            <span class="suf">%</span>
+            <input type="number" id="investReturn" value="7" step="0.5" />
+          </div>
+        </div>
+        <div class="scenario-row" style="margin-top:0.75rem;">
+          <button class="scen-btn bear" data-rate="4" onclick="setScenario(4, this)">🐻 Bear — 4%</button>
+          <button class="scen-btn base active" data-rate="7" onclick="setScenario(7, this)">📊 Base — 7%</button>
+          <button class="scen-btn bull" data-rate="10" onclick="setScenario(10, this)">🐂 Bull — 10%</button>
+        </div>
+        <div class="field" style="margin-top:1rem; padding-top:0.875rem; border-top:1px solid var(--slate-100);">
+          <label>Inflation Rate (CPI)
+            <span class="tip" data-tip="Applied annually to insurance, maintenance, and registration. Loan and lease payments are fixed contracts — not inflated.">?</span>
+          </label>
+          <div class="input-wrap has-suf">
+            <span class="suf">%</span>
+            <input type="number" id="cpiRate" value="3" step="0.5" min="0" max="20" />
+          </div>
+        </div>
+        <p style="margin-top:0.75rem; font-size:0.7rem; color:var(--slate-400); line-height:1.55;">
+          Higher returns make cash-heavy options look worse (more opportunity cost). Lower returns favor paying cash upfront.
+        </p>
+      </div>
+    </div>
+
+  </div><!-- /inputs-row -->
+
+
+  <!-- ========================
+       RIGHT — RESULTS
+       ======================== -->
+  <div class="results-col">
+
+    <!-- Option Cards Grid (populated by JS) -->
+    <div class="options-grid" id="optionsGrid"></div>
+
+    <!-- Recommendation -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon green">&#x1F3C6;</div>
+        <span class="card-title">Recommendation Summary</span>
+      </div>
+      <div class="card-body">
+        <div class="rec-grid" id="recGrid"></div>
+        <div class="rec-explanation" id="recExplanation"></div>
+      </div>
+    </div>
+
+    <!-- Chart 1: Net Position -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon indigo">&#x1F4CA;</div>
+        <span class="card-title">Ending Net Position by Option</span>
+      </div>
+      <div class="card-body">
+        <p style="font-size:0.72rem; color:var(--slate-500); margin-bottom:0.875rem; line-height:1.55;">
+          <strong>Net Position</strong> = Investment Balance at End + Vehicle Resale − Total Ongoing Costs.
+          The upfront payment reduces the investment balance, capturing opportunity cost directly.
+          <strong>Higher is better.</strong>
+        </p>
+        <div class="chart-wrap">
+          <canvas id="netPositionChart"></canvas>
+        </div>
+        <div id="netBreakdownTable" style="margin-top:1rem;"></div>
+      </div>
+    </div>
+
+    <!-- Chart 2: Cost Breakdown -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon amber">&#x1F4B8;</div>
+        <span class="card-title">Total Cost Breakdown by Option</span>
+      </div>
+      <div class="card-body">
+        <p style="font-size:0.72rem; color:var(--slate-500); margin-bottom:0.875rem; line-height:1.55;">
+          Stacked bars show where your money goes over the full horizon. Does not include investment balance — just cash out the door.
+        </p>
+        <div class="chart-wrap">
+          <canvas id="costBreakdownChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Amortization Schedule (Finance option) -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon amber">📅</div>
+        <span class="card-title">Finance — New Car: Loan Amortization Schedule</span>
+      </div>
+      <div class="card-body">
+        <p style="font-size:0.72rem; color:var(--slate-500); margin-bottom:0.875rem; line-height:1.55;">
+          Year-by-year breakdown of how each loan payment splits between <strong style="color:#6366f1">principal</strong> and <strong style="color:#ef4444">interest</strong>. Early payments are interest-heavy — this is the front-loading effect of amortization.
+        </p>
+        <button id="amortToggle" class="amort-toggle" onclick="toggleAmort()">▼ Show Year-by-Year Schedule</button>
+        <div id="amortBody" style="display:none; margin-top:1rem;">
+          <div id="amortTableWrap"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- How DriveWise Thinks -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon navy">&#x1F9E0;</div>
+        <span class="card-title">How DriveWise Thinks</span>
+      </div>
+      <div class="card-body">
+        <div class="how-grid">
+          <div class="how-item">
+            <div class="how-title">💵 Cash Flow</div>
+            <div class="how-desc">Every dollar spent on a car is tracked: upfront payments, monthly costs, insurance, maintenance, and registration. No hidden costs — all outflows appear in the total out-of-pocket figure.</div>
+          </div>
+          <div class="how-item">
+            <div class="how-title">📈 Opportunity Cost</div>
+            <div class="how-desc">Money spent upfront can't compound. If you pay $50K cash for a car instead of investing it at 7% for 5 years, you forgo ~$20K in growth. DriveWise makes this trade-off explicit via the investment balance.</div>
+          </div>
+          <div class="how-item">
+            <div class="how-title">🔄 Resale Value</div>
+            <div class="how-desc">Owned vehicles retain value at the end of your horizon. Resale is added back to your net position — it's equity, not a cost. Leased vehicles return to the dealer with no recovery for you.</div>
+          </div>
+          <div class="how-item">
+            <div class="how-title">🏦 Financing Trade-off</div>
+            <div class="how-desc">Financing keeps more cash invested but adds interest cost. If your investment return exceeds your loan APR, financing wins on net position. If APR > return, paying cash wins. DriveWise models this explicitly.</div>
+          </div>
+        </div>
+        <div class="formula-note">
+          <strong>Net Position Formula:</strong>
+          <code style="display:block; margin-top:0.4rem; font-size:0.78rem; color:var(--indigo-dark); background:var(--indigo-light); padding:0.5rem 0.75rem; border-radius:var(--radius-sm);">
+            Net Position = (Cash Available − Upfront Cost) × (1 + r)ⁿ + Resale Value − Total Ongoing Costs
+          </code>
+          <span style="display:block; margin-top:0.5rem;">Where <em>r</em> = investment return rate, <em>n</em> = horizon in years. For the financed option, outstanding loan balance at horizon end is subtracted if the loan outlasts the comparison period.</span>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /results-col -->
+
+</main>
+
+<footer class="footer">
+  <div class="disclaimer" style="max-width:860px; margin:0 auto 1rem;">
+    &#x26A0;&#xFE0F; <strong>Educational disclaimer:</strong> DriveWise is a simplified comparative model for educational purposes. It uses constant rates and a fixed CPI assumption; actual inflation may vary. It does not account for all real-world variables. This is not financial advice. Consult a qualified advisor before making major financial decisions.
+  </div>
+  DriveWise &copy; 2025 &nbsp;·&nbsp; Educational Use Only &nbsp;·&nbsp; Built for Finance Class Demo
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

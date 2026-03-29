@@ -136,93 +136,27 @@
       </div>
     </div>
 
-    <!-- 3. Financing -->
+    <!-- 3. Financing Options (dynamic) -->
     <div class="card">
       <div class="card-header">
         <div class="card-icon amber">&#x1F3E6;</div>
-        <span class="card-title">Financing Assumptions</span>
+        <span class="card-title">Financing Options</span>
+        <button class="add-opt-btn" onclick="addFinOpt()">+ Add</button>
       </div>
       <div class="card-body">
-        <div class="input-grid">
-          <div class="field">
-            <label>Down Payment</label>
-            <div class="input-wrap has-pre">
-              <span class="pre">$</span>
-              <input type="number" id="downPayment" value="5000" />
-            </div>
-          </div>
-          <div class="field">
-            <label>Loan APR
-              <span class="tip" data-tip="Annual percentage rate on the auto loan">?</span>
-            </label>
-            <div class="input-wrap has-suf">
-              <span class="suf">%</span>
-              <input type="number" id="loanAPR" value="6.5" step="0.1" />
-            </div>
-          </div>
-          <div class="field span-2">
-            <label>Loan Term
-              <span class="tip" data-tip="Common terms: 48, 60, 72, or 84 months">?</span>
-            </label>
-            <div class="input-wrap has-suf">
-              <span class="suf">mo</span>
-              <input type="number" id="loanTermMonths" value="60" />
-            </div>
-          </div>
-        </div>
+        <div id="finOptionsContainer"></div>
       </div>
     </div>
 
-    <!-- 4. Lease -->
+    <!-- 4. Lease Options (dynamic) -->
     <div class="card">
       <div class="card-header">
         <div class="card-icon purple">&#x1F4CB;</div>
-        <span class="card-title">Lease Assumptions</span>
+        <span class="card-title">Lease Options</span>
+        <button class="add-opt-btn" onclick="addLeaseOpt()">+ Add</button>
       </div>
       <div class="card-body">
-        <div class="input-grid">
-          <div class="field">
-            <label>Monthly Payment</label>
-            <div class="input-wrap has-pre">
-              <span class="pre">$</span>
-              <input type="number" id="leaseMonthly" value="549" />
-            </div>
-          </div>
-          <div class="field">
-            <label>Due at Signing
-              <span class="tip" data-tip="First month + security deposit + acquisition fee paid upfront">?</span>
-            </label>
-            <div class="input-wrap has-pre">
-              <span class="pre">$</span>
-              <input type="number" id="dueAtSigning" value="3500" />
-            </div>
-          </div>
-          <div class="field">
-            <label>Lease Term
-              <span class="tip" data-tip="If horizon exceeds lease term, DriveWise assumes you renew on the same terms">?</span>
-            </label>
-            <div class="input-wrap has-suf">
-              <span class="suf">mo</span>
-              <input type="number" id="leaseTermMonths" value="36" />
-            </div>
-          </div>
-          <div class="field">
-            <label>Lease-End Fee</label>
-            <div class="input-wrap has-pre">
-              <span class="pre">$</span>
-              <input type="number" id="leaseEndFee" value="395" />
-            </div>
-          </div>
-          <div class="field span-2">
-            <label>Excess Mileage / Wear (total est.)
-              <span class="tip" data-tip="Total estimated charges across the horizon for mileage overages or wear-and-tear">?</span>
-            </label>
-            <div class="input-wrap has-pre">
-              <span class="pre">$</span>
-              <input type="number" id="excessMileage" value="1200" />
-            </div>
-          </div>
-        </div>
+        <div id="leaseOptionsContainer"></div>
       </div>
     </div>
 
@@ -368,7 +302,7 @@
     </div>
 
     <!-- Amortization Schedule (Finance option) -->
-    <div class="card">
+    <div class="card" id="amortSection">
       <div class="card-header">
         <div class="card-icon amber">📅</div>
         <span class="card-title">Finance — New Car: Loan Amortization Schedule</span>
@@ -377,7 +311,10 @@
         <p style="font-size:0.72rem; color:var(--slate-500); margin-bottom:0.875rem; line-height:1.55;">
           Year-by-year breakdown of how each loan payment splits between <strong style="color:#6366f1">principal</strong> and <strong style="color:#ef4444">interest</strong>. Early payments are interest-heavy — this is the front-loading effect of amortization.
         </p>
-        <button id="amortToggle" class="amort-toggle" onclick="toggleAmort()">▼ Show Year-by-Year Schedule</button>
+        <div style="display:flex; align-items:center; gap:0.75rem; flex-wrap:wrap;">
+          <button id="amortToggle" class="amort-toggle" onclick="toggleAmort()">▼ Show Year-by-Year Schedule</button>
+          <select id="amortSelect" class="amort-select" onchange="onAmortSelect(this.value)" style="display:none;"></select>
+        </div>
         <div id="amortBody" style="display:none; margin-top:1rem;">
           <div id="amortTableWrap"></div>
         </div>

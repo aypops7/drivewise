@@ -366,10 +366,91 @@ body {
   gap: 1.125rem;
 }
 
+/* ---- Dynamic Option Input Cards ---- */
+.add-opt-btn {
+  margin-left: auto;
+  padding: 0.2rem 0.65rem;
+  background: var(--indigo-light);
+  color: var(--indigo-dark);
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  transition: background 0.15s;
+}
+.add-opt-btn:hover { background: #c7d2fe; }
+
+.dyn-opt-card {
+  background: var(--slate-50);
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+.dyn-opt-card:last-child { margin-bottom: 0; }
+
+.dyn-opt-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.dyn-opt-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.opt-name-input {
+  flex: 1;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--navy);
+  border: none;
+  background: transparent;
+  outline: none;
+  font-family: 'Inter', sans-serif;
+  min-width: 0;
+}
+.opt-name-input:focus { color: var(--indigo); }
+
+.remove-opt-btn {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1px solid var(--slate-200);
+  background: white;
+  color: var(--slate-400);
+  font-size: 0.7rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  line-height: 1;
+}
+.remove-opt-btn:hover { border-color: var(--red); color: var(--red); background: var(--red-light); }
+
+.amort-select {
+  padding: 0.35rem 0.65rem;
+  border: 1.5px solid var(--slate-200);
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  font-family: 'Inter', sans-serif;
+  color: var(--navy);
+  background: white;
+  cursor: pointer;
+}
+.amort-select:focus { outline: none; border-color: var(--indigo); }
+
 /* ---- Option Cards Grid ---- */
 .options-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
   gap: 1rem;
 }
 

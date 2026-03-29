@@ -29,6 +29,12 @@
   </div>
 </header>
 
+<!-- Tab Bar -->
+<div class="tab-bar">
+  <button class="tab-btn active" onclick="switchTab('calculator', this)">&#x1F4CA; Calculator</button>
+  <button class="tab-btn" onclick="switchTab('education', this)">&#x1F393; Education</button>
+</div>
+
 <!-- Print-only header (hidden on screen) -->
 <div class="print-header">
   <div class="print-logo">DriveWise</div>
@@ -82,19 +88,12 @@
       <div class="card-body">
         <div class="input-grid">
           <div class="field">
-            <label>New Car Price
+            <label>Car Price
               <span class="tip" data-tip="MSRP or agreed selling price, before tax and fees">?</span>
             </label>
             <div class="input-wrap has-pre">
               <span class="pre">$</span>
-              <input type="number" id="newCarPrice" value="45000" />
-            </div>
-          </div>
-          <div class="field">
-            <label>Used Car Price</label>
-            <div class="input-wrap has-pre">
-              <span class="pre">$</span>
-              <input type="number" id="usedCarPrice" value="28000" />
+              <input type="number" id="carPrice" value="45000" />
             </div>
           </div>
           <div class="field">
@@ -151,20 +150,13 @@
               <input type="number" id="cashAvailable" value="50000" />
             </div>
           </div>
-          <div class="field">
-            <label>New Car Resale
+          <div class="field span-2">
+            <label>Resale Value
               <span class="tip" data-tip="Estimated value when you sell or trade in at end of horizon">?</span>
             </label>
             <div class="input-wrap has-pre">
               <span class="pre">$</span>
-              <input type="number" id="newCarResale" value="22000" />
-            </div>
-          </div>
-          <div class="field">
-            <label>Used Car Resale</label>
-            <div class="input-wrap has-pre">
-              <span class="pre">$</span>
-              <input type="number" id="usedCarResale" value="12000" />
+              <input type="number" id="carResale" value="22000" />
             </div>
           </div>
         </div>
@@ -217,28 +209,16 @@
               <input type="number" id="registrationPerYear" value="250" />
             </div>
           </div>
-          <div class="field">
-            <label>Maintenance — New
-              <span class="tip" data-tip="Annual maintenance for new or leased car (oil, tires, etc.)">?</span>
+          <div class="field span-2">
+            <label>Maintenance / Year
+              <span class="tip" data-tip="Annual maintenance for owned or financed car (oil, tires, etc.). Lease options do not include this — adjust if your lease requires it.">?</span>
             </label>
             <div class="input-wrap has-pre">
               <span class="pre">$</span>
-              <input type="number" id="maintenanceNew" value="600" />
-            </div>
-          </div>
-          <div class="field">
-            <label>Maintenance — Used
-              <span class="tip" data-tip="Older cars typically cost more to maintain. Adjust to match the vehicle age.">?</span>
-            </label>
-            <div class="input-wrap has-pre">
-              <span class="pre">$</span>
-              <input type="number" id="maintenanceUsed" value="1400" />
+              <input type="number" id="maintenance" value="600" />
             </div>
           </div>
         </div>
-        <p style="margin-top:0.625rem; font-size:0.7rem; color:var(--slate-400);">
-          Note: Lease option does not include a separate maintenance line — adjust if your lease requires it.
-        </p>
       </div>
     </div>
 
@@ -258,10 +238,11 @@
             <input type="number" id="investReturn" value="7" step="0.5" />
           </div>
         </div>
-        <div class="scenario-row" style="margin-top:0.75rem;">
+        <div class="scenario-row" style="margin-top:0.75rem; align-items:center;">
           <button class="scen-btn bear" data-rate="4" onclick="setScenario(4, this)">🐻 Bear — 4%</button>
           <button class="scen-btn base active" data-rate="7" onclick="setScenario(7, this)">📊 Base — 7%</button>
           <button class="scen-btn bull" data-rate="10" onclick="setScenario(10, this)">🐂 Bull — 10%</button>
+          <span class="tip tip-left" data-tip="Bear (4%): conservative — low-growth savings account or bond-heavy portfolio. Base (7%): historical average for a diversified stock index fund. Bull (10%): optimistic — strong equity market years. These presets set the investment return used to calculate opportunity cost.">?</span>
         </div>
         <div class="field" style="margin-top:1rem; padding-top:0.875rem; border-top:1px solid var(--slate-100);">
           <label>Inflation Rate (CPI)
@@ -405,6 +386,15 @@
   </div><!-- /results-col -->
 
 </main>
+
+<!-- Education Tab Content -->
+<div id="educationPanel" style="display:none;">
+  <div class="education-under-construction">
+    <div class="uc-icon">&#x1F6A7;</div>
+    <div class="uc-title">Under Construction</div>
+    <div class="uc-desc">Educational content coming soon — concepts like opportunity cost, amortization, depreciation, and how to read the results.</div>
+  </div>
+</div>
 
 <footer class="footer">
   <div class="disclaimer" style="max-width:860px; margin:0 auto 1rem;">

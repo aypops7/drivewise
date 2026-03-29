@@ -112,47 +112,31 @@ let nextLeaseId = 2;
 // PER-OPTION CALCULATION HELPERS
 // ------------------------------------------------------------
 
-function calcCashNew(inp, shared, hMonths, miles) {
-  const purchase  = inp.newCarPrice * (1 + inp.salesTax / 100) + inp.fees;
-  const maintInfl = sumInflated(inp.maintenanceNew, inp.cpiRate, inp.horizonYears);
+function calcCash(inp, shared, hMonths, miles) {
+  const purchase  = inp.carPrice * (1 + inp.salesTax / 100) + inp.fees;
+  const maintInfl = sumInflated(inp.maintenance, inp.cpiRate, inp.horizonYears);
   const ongoing   = shared + maintInfl;
   const oop       = purchase + ongoing;
   const invest    = fv(inp.cashAvailable - purchase, inp.investReturn, inp.horizonYears);
   return {
-    key: 'cashNew', label: 'Pay Cash — New', shortLabel: 'Cash (New)', color: '#6366f1', type: 'cash',
+    key: 'cash', label: 'Pay Cash', shortLabel: 'Pay Cash', color: '#6366f1', type: 'cash',
     upfrontCost: purchase, totalOngoing: ongoing, runningCosts: ongoing, loanLeasePaid: 0,
     totalOOP: oop, totalInterest: 0, monthlyPayment: null, investmentAtEnd: invest,
-    resaleValue: inp.newCarResale, outstandingDebt: 0,
-    netPosition: invest + inp.newCarResale - ongoing,
-    monthlyEquiv: oop / hMonths, costPerMile: oop / miles,
-  };
-}
-
-function calcCashUsed(inp, shared, hMonths, miles) {
-  const purchase  = inp.usedCarPrice * (1 + inp.salesTax / 100) + inp.fees;
-  const maintInfl = sumInflated(inp.maintenanceUsed, inp.cpiRate, inp.horizonYears);
-  const ongoing   = shared + maintInfl;
-  const oop       = purchase + ongoing;
-  const invest    = fv(inp.cashAvailable - purchase, inp.investReturn, inp.horizonYears);
-  return {
-    key: 'cashUsed', label: 'Cash — Used', shortLabel: 'Cash (Used)', color: '#10b981', type: 'cash',
-    upfrontCost: purchase, totalOngoing: ongoing, runningCosts: ongoing, loanLeasePaid: 0,
-    totalOOP: oop, totalInterest: 0, monthlyPayment: null, investmentAtEnd: invest,
-    resaleValue: inp.usedCarResale, outstandingDebt: 0,
-    netPosition: invest + inp.usedCarResale - ongoing,
+    resaleValue: inp.carResale, outstandingDebt: 0,
+    netPosition: invest + inp.carResale - ongoing,
     monthlyEquiv: oop / hMonths, costPerMile: oop / miles,
   };
 }
 
 function calcFinanceOption(inp, opt, color, shared, hMonths, miles) {
-  const taxFees     = inp.newCarPrice * (inp.salesTax / 100) + inp.fees;
+  const taxFees     = inp.carPrice * (inp.salesTax / 100) + inp.fees;
   const upfront     = opt.downPayment + taxFees;
-  const principal   = Math.max(0, inp.newCarPrice - opt.downPayment);
+  const principal   = Math.max(0, inp.carPrice - opt.downPayment);
   const monthly     = calcMonthlyPayment(principal, opt.loanAPR, opt.loanTermMonths);
   const payMonths   = Math.min(hMonths, opt.loanTermMonths);
   const loanPaid    = monthly * payMonths;
   const interest    = monthly * opt.loanTermMonths - principal; // full-term interest
-  const maintInfl   = sumInflated(inp.maintenanceNew, inp.cpiRate, inp.horizonYears);
+  const maintInfl   = sumInflated(inp.maintenance, inp.cpiRate, inp.horizonYears);
   const ongoing     = shared + maintInfl;
   const oop         = upfront + loanPaid + ongoing;
   const invest      = fv(inp.cashAvailable - upfront, inp.investReturn, inp.horizonYears);
@@ -163,8 +147,8 @@ function calcFinanceOption(inp, opt, color, shared, hMonths, miles) {
     key: `fin_${opt.id}`, label: opt.name, shortLabel: opt.name, color, type: 'finance',
     upfrontCost: upfront, totalOngoing: ongoing, runningCosts: ongoing, loanLeasePaid: loanPaid,
     totalOOP: oop, totalInterest: interest, monthlyPayment: monthly, investmentAtEnd: invest,
-    resaleValue: inp.newCarResale, outstandingDebt: outstanding,
-    netPosition: invest + inp.newCarResale - loanPaid - ongoing - outstanding,
+    resaleValue: inp.carResale, outstandingDebt: outstanding,
+    netPosition: invest + inp.carResale - loanPaid - ongoing - outstanding,
     monthlyEquiv: oop / hMonths, costPerMile: oop / miles,
     _amort: { principal, apr: opt.loanAPR, termMonths: opt.loanTermMonths, horizonYears: inp.horizonYears },
   };
@@ -203,8 +187,7 @@ function calculateAll(inp, finOptsOverride, leaseOptsOverride) {
   const leaseOpts = leaseOptsOverride || leaseOptions;
 
   return [
-    calcCashNew(inp, shared, hMonths, miles),
-    calcCashUsed(inp, shared, hMonths, miles),
+    calcCash(inp, shared, hMonths, miles),
     ...finOpts.map((opt, i)   => calcFinanceOption(inp, opt, FIN_COLORS[i % FIN_COLORS.length], shared, hMonths, miles)),
     ...leaseOpts.map((opt, i) => calcLeaseOption(inp, opt, LEASE_COLORS[i % LEASE_COLORS.length], shared, hMonths, miles)),
   ];
@@ -217,18 +200,15 @@ function calculateAll(inp, finOptsOverride, leaseOptsOverride) {
 function getInputs() {
   const g = id => { const el = document.getElementById(id); return el ? (parseFloat(el.value) || 0) : 0; };
   return {
-    newCarPrice:         g('newCarPrice'),
-    usedCarPrice:        g('usedCarPrice'),
+    carPrice:            g('carPrice'),
     salesTax:            g('salesTax'),
     fees:                g('fees'),
     horizonYears:        Math.max(1, g('horizonYears')),
     annualMiles:         Math.max(1, g('annualMiles')),
     cashAvailable:       g('cashAvailable'),
-    newCarResale:        g('newCarResale'),
-    usedCarResale:       g('usedCarResale'),
+    carResale:           g('carResale'),
     insurancePerYear:    g('insurancePerYear'),
-    maintenanceNew:      g('maintenanceNew'),
-    maintenanceUsed:     g('maintenanceUsed'),
+    maintenance:         g('maintenance'),
     registrationPerYear: g('registrationPerYear'),
     investReturn:        g('investReturn'),
     cpiRate:             g('cpiRate'),
@@ -588,10 +568,8 @@ function renderRecommendation(results) {
 
   const inp = getInputs();
   let explanation = '';
-  if (rNet.type === 'cash' && rNet.key === 'cashUsed') {
-    explanation = `The used car purchase leaves you in the strongest financial position after ${inp.horizonYears} years. The lower purchase price keeps more cash invested, and smaller depreciation preserves value. Higher maintenance costs are more than offset by the cheaper upfront outlay and reduced opportunity cost drag.`;
-  } else if (rNet.type === 'cash') {
-    explanation = `Paying cash for the new car produces the best net position over ${inp.horizonYears} years. No interest charges and a strong resale value make it the most efficient option — particularly because your investment return (${inp.investReturn}%) is below what you'd pay in loan interest.`;
+  if (rNet.type === 'cash') {
+    explanation = `Paying cash produces the best net position over ${inp.horizonYears} years. No interest charges and a solid resale value make it the most efficient option — particularly because your investment return (${inp.investReturn}%) is below what you'd pay in loan interest.`;
   } else if (rNet.type === 'finance') {
     explanation = `"${rNet.label}" wins because keeping more cash invested at ${inp.investReturn}% outpaces the loan interest. The spread between your investment return and loan rate is doing real work — this is the classic "borrow cheap, invest the difference" trade-off in action.`;
   } else {
@@ -725,6 +703,29 @@ function renderAmortTable(finResult) {
 // PRINT / SAVE PDF
 // ------------------------------------------------------------
 
+// ------------------------------------------------------------
+// TAB NAVIGATION
+// ------------------------------------------------------------
+
+function switchTab(tab, btn) {
+  const calculatorParts = [
+    document.querySelector('.scenario-bar'),
+    document.querySelector('.main'),
+  ];
+  const educationPanel = document.getElementById('educationPanel');
+
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+
+  if (tab === 'calculator') {
+    calculatorParts.forEach(el => { if (el) el.style.display = ''; });
+    if (educationPanel) educationPanel.style.display = 'none';
+  } else {
+    calculatorParts.forEach(el => { if (el) el.style.display = 'none'; });
+    if (educationPanel) educationPanel.style.display = 'block';
+  }
+}
+
 function printReport() {
   // Stamp the current date and assumption summary into the print header
   const inp     = getInputs();
@@ -853,9 +854,8 @@ function renderCompareTable() {
     const bestMo   = results.reduce((a, b) => b.monthlyEquiv < a.monthlyEquiv ? b : a);
     const bestFin  = results.filter(r => r.type === 'finance').reduce((a, b) => (!a || b.netPosition > a.netPosition) ? b : a, null);
     const bestLease= results.filter(r => r.type === 'lease').reduce((a, b) => (!a || b.netPosition > a.netPosition) ? b : a, null);
-    const cashNew  = results.find(r => r.key === 'cashNew');
-    const cashUsed = results.find(r => r.key === 'cashUsed');
-    return { s, best, bestMo, bestFin, bestLease, cashNew, cashUsed };
+    const cash = results.find(r => r.key === 'cash');
+    return { s, best, bestMo, bestFin, bestLease, cash };
   });
 
   const n       = data.length;
@@ -884,12 +884,8 @@ function renderCompareTable() {
     </tr>
     <tr class="ct-section-hdr"><td colspan="${n+1}">Net Position by Option Type</td></tr>
     <tr>
-      <td class="ct-label">Pay Cash — New</td>
-      ${data.map(d => cell(fmt$(d.cashNew.netPosition), false)).join('')}
-    </tr>
-    <tr>
-      <td class="ct-label">Cash — Used</td>
-      ${data.map(d => cell(fmt$(d.cashUsed.netPosition), false)).join('')}
+      <td class="ct-label">Pay Cash</td>
+      ${data.map(d => cell(fmt$(d.cash.netPosition), false)).join('')}
     </tr>
     <tr>
       <td class="ct-label">Best Finance</td>

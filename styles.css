@@ -50,6 +50,55 @@ body {
   min-height: 100vh;
 }
 
+/* ---- Tab Bar ---- */
+.tab-bar {
+  background: var(--navy);
+  display: flex;
+  gap: 0;
+  padding: 0 2rem;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+.tab-btn {
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.55);
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 0.65rem 1.25rem;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  transition: color 0.15s, border-color 0.15s;
+  letter-spacing: 0.01em;
+}
+.tab-btn:hover { color: rgba(255,255,255,0.85); }
+.tab-btn.active {
+  color: var(--white);
+  border-bottom-color: #6366f1;
+}
+
+/* ---- Education placeholder ---- */
+.education-under-construction {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 6rem 2rem;
+  text-align: center;
+}
+.uc-icon { font-size: 3.5rem; }
+.uc-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--navy);
+}
+.uc-desc {
+  font-size: 0.9rem;
+  color: var(--slate-400);
+  max-width: 420px;
+  line-height: 1.6;
+}
+
 /* ---- Header ---- */
 .header {
   background: var(--navy);
@@ -267,6 +316,15 @@ body {
   transition: opacity 0.15s;
   line-height: 1.45;
   box-shadow: var(--shadow);
+}
+
+/* Anchor tooltip to the right edge — use on tips near the right side of the screen */
+.tip-left::after {
+  left: auto;
+  right: 0;
+  transform: none;
+  width: 260px;
+  text-align: left;
 }
 
 .tip:hover::after { opacity: 1; }

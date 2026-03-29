@@ -24,9 +24,44 @@
   </div>
   <div class="header-right">
     <span class="header-note">Results update live</span>
+    <button class="print-btn" onclick="printReport()">&#x1F4C4; Save PDF</button>
     <span class="header-badge">&#x26A1; Live Calculator</span>
   </div>
 </header>
+
+<!-- Print-only header (hidden on screen) -->
+<div class="print-header">
+  <div class="print-logo">DriveWise</div>
+  <div class="print-sub">Car Acquisition Cost Analyzer</div>
+  <div class="print-meta" id="printDate"></div>
+  <div class="print-meta" id="printHorizon"></div>
+  <div class="print-best" id="printBest"></div>
+</div>
+
+<!-- ============================================================
+     SCENARIO BAR
+     ============================================================ -->
+<div class="scenario-bar">
+  <div class="scenario-bar-left">
+    <span class="scenario-bar-label">Scenarios:</span>
+    <div id="scenarioPills" class="scenario-pills"></div>
+    <button id="compareBtn" class="compare-btn" onclick="renderCompareTable()" style="display:none;">&#x2696; Compare</button>
+  </div>
+  <button class="save-scenario-btn" onclick="promptSaveScenario()">&#x1F4BE; Save Scenario</button>
+</div>
+
+<!-- Save Scenario Modal -->
+<div id="saveModal" class="modal-overlay" style="display:none;" onclick="if(event.target===this)cancelSave()">
+  <div class="modal-box">
+    <div class="modal-title">Save Scenario</div>
+    <p class="modal-desc">Give this setup a name (e.g. "Honda Accord", "Toyota Camry")</p>
+    <input type="text" id="scenarioNameInput" class="modal-input" placeholder="e.g. Honda Accord" maxlength="40" />
+    <div class="modal-actions">
+      <button class="modal-btn-primary" onclick="confirmSave()">Save</button>
+      <button class="modal-btn-cancel" onclick="cancelSave()">Cancel</button>
+    </div>
+  </div>
+</div>
 
 <!-- ============================================================
      MAIN LAYOUT
@@ -318,6 +353,17 @@
         <div id="amortBody" style="display:none; margin-top:1rem;">
           <div id="amortTableWrap"></div>
         </div>
+      </div>
+    </div>
+
+    <!-- Scenario Compare Table (shown when 2+ scenarios saved) -->
+    <div class="card" id="compareCard" style="display:none;">
+      <div class="card-header">
+        <div class="card-icon indigo">&#x2696;</div>
+        <span class="card-title">Scenario Comparison</span>
+      </div>
+      <div class="card-body">
+        <div id="compareTableWrap"></div>
       </div>
     </div>
 

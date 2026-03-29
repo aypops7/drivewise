@@ -194,16 +194,19 @@ function calcLeaseOption(inp, opt, color, shared, hMonths, miles) {
 // MAIN CALCULATE — returns array of results
 // ------------------------------------------------------------
 
-function calculateAll(inp) {
-  const hMonths = inp.horizonYears * 12;
-  const miles   = inp.annualMiles * inp.horizonYears;
-  const shared  = sumInflated(inp.insurancePerYear + inp.registrationPerYear, inp.cpiRate, inp.horizonYears);
+// finOptsOverride / leaseOptsOverride let saved scenarios be recalculated without touching global state
+function calculateAll(inp, finOptsOverride, leaseOptsOverride) {
+  const hMonths   = inp.horizonYears * 12;
+  const miles     = inp.annualMiles * inp.horizonYears;
+  const shared    = sumInflated(inp.insurancePerYear + inp.registrationPerYear, inp.cpiRate, inp.horizonYears);
+  const finOpts   = finOptsOverride   || financeOptions;
+  const leaseOpts = leaseOptsOverride || leaseOptions;
 
   return [
     calcCashNew(inp, shared, hMonths, miles),
     calcCashUsed(inp, shared, hMonths, miles),
-    ...financeOptions.map((opt, i) => calcFinanceOption(inp, opt, FIN_COLORS[i % FIN_COLORS.length], shared, hMonths, miles)),
-    ...leaseOptions.map((opt, i)   => calcLeaseOption(inp, opt, LEASE_COLORS[i % LEASE_COLORS.length], shared, hMonths, miles)),
+    ...finOpts.map((opt, i)   => calcFinanceOption(inp, opt, FIN_COLORS[i % FIN_COLORS.length], shared, hMonths, miles)),
+    ...leaseOpts.map((opt, i) => calcLeaseOption(inp, opt, LEASE_COLORS[i % LEASE_COLORS.length], shared, hMonths, miles)),
   ];
 }
 
@@ -247,6 +250,7 @@ function renderFinanceInputs() {
         <div class="dyn-opt-header">
           <span class="dyn-opt-dot" style="background:${color}"></span>
           <input class="opt-name-input" type="text" value="${opt.name}"
+                 data-name-for="fin-${opt.id}"
                  oninput="updateFinOpt(${opt.id},'name',this.value);update()" />
           ${canRemove ? `<button class="remove-opt-btn" onclick="removeFinOpt(${opt.id})">&#x2715;</button>` : ''}
         </div>
@@ -288,6 +292,7 @@ function renderLeaseInputs() {
         <div class="dyn-opt-header">
           <span class="dyn-opt-dot" style="background:${color}"></span>
           <input class="opt-name-input" type="text" value="${opt.name}"
+                 data-name-for="lease-${opt.id}"
                  oninput="updateLeaseOpt(${opt.id},'name',this.value);update()" />
           ${canRemove ? `<button class="remove-opt-btn" onclick="removeLeaseOpt(${opt.id})">&#x2715;</button>` : ''}
         </div>
@@ -351,7 +356,18 @@ function removeFinOpt(id) {
 
 function updateFinOpt(id, field, value) {
   const opt = financeOptions.find(o => o.id === id);
-  if (opt) opt[field] = field === 'name' ? value : (parseFloat(value) || 0);
+  if (!opt) return;
+  if (field === 'name') {
+    opt.name = value;
+    opt.customName = true;  // user typed a custom name — stop auto-updating
+  } else {
+    opt[field] = parseFloat(value) || 0;
+    if (!opt.customName) {
+      opt.name = `Finance ${opt.loanAPR}% / ${opt.loanTermMonths}mo`;
+      const nameEl = document.querySelector(`[data-name-for="fin-${id}"]`);
+      if (nameEl) nameEl.value = opt.name;
+    }
+  }
 }
 
 function addLeaseOpt() {
@@ -369,7 +385,18 @@ function removeLeaseOpt(id) {
 
 function updateLeaseOpt(id, field, value) {
   const opt = leaseOptions.find(o => o.id === id);
-  if (opt) opt[field] = field === 'name' ? value : (parseFloat(value) || 0);
+  if (!opt) return;
+  if (field === 'name') {
+    opt.name = value;
+    opt.customName = true;  // user typed a custom name — stop auto-updating
+  } else {
+    opt[field] = parseFloat(value) || 0;
+    if (!opt.customName) {
+      opt.name = `Lease $${opt.leaseMonthly}/mo ${opt.leaseTermMonths}mo`;
+      const nameEl = document.querySelector(`[data-name-for="lease-${id}"]`);
+      if (nameEl) nameEl.value = opt.name;
+    }
+  }
 }
 
 // ------------------------------------------------------------
@@ -695,6 +722,236 @@ function renderAmortTable(finResult) {
 }
 
 // ------------------------------------------------------------
+// PRINT / SAVE PDF
+// ------------------------------------------------------------
+
+function printReport() {
+  // Stamp the current date and assumption summary into the print header
+  const inp     = getInputs();
+  const results = calculateAll(inp);
+  const best    = results.reduce((a, b) => b.netPosition > a.netPosition ? b : a);
+
+  document.getElementById('printDate').textContent    = new Date().toLocaleDateString('en-US', { year:'numeric', month:'long', day:'numeric' });
+  document.getElementById('printHorizon').textContent = `${inp.horizonYears}-year horizon · ${inp.annualMiles.toLocaleString()} mi/yr · ${inp.investReturn}% inv. return`;
+  document.getElementById('printBest').textContent    = `Best option: ${best.label} — Net Position ${fmt$(best.netPosition)}`;
+
+  window.print();
+}
+
+// ------------------------------------------------------------
+// SCENARIO MANAGEMENT  (localStorage)
+// ------------------------------------------------------------
+
+function getSavedScenarios() {
+  try { return JSON.parse(localStorage.getItem('dw_scenarios') || '[]'); }
+  catch { return []; }
+}
+
+function saveScenario(name) {
+  const scenarios = getSavedScenarios();
+  scenarios.push({
+    id:             Date.now(),
+    name:           name.trim(),
+    savedAt:        new Date().toLocaleDateString(),
+    inputs:         getInputs(),
+    financeOptions: JSON.parse(JSON.stringify(financeOptions)),
+    leaseOptions:   JSON.parse(JSON.stringify(leaseOptions)),
+  });
+  localStorage.setItem('dw_scenarios', JSON.stringify(scenarios));
+  renderScenarioBar();
+  renderCompareTable();
+}
+
+function loadScenario(id) {
+  const s = getSavedScenarios().find(s => s.id === id);
+  if (!s) return;
+  Object.entries(s.inputs).forEach(([key, val]) => {
+    const el = document.getElementById(key);
+    if (el) el.value = val;
+  });
+  financeOptions = JSON.parse(JSON.stringify(s.financeOptions));
+  leaseOptions   = JSON.parse(JSON.stringify(s.leaseOptions));
+  nextFinId   = Math.max(...financeOptions.map(o => o.id), 0) + 1;
+  nextLeaseId = Math.max(...leaseOptions.map(o => o.id), 0) + 1;
+  renderFinanceInputs();
+  renderLeaseInputs();
+  const rateVal = s.inputs.investReturn;
+  document.querySelectorAll('.scen-btn').forEach(btn => {
+    btn.classList.toggle('active', parseFloat(btn.dataset.rate) === rateVal);
+  });
+  update();
+}
+
+function deleteScenario(id) {
+  const scenarios = getSavedScenarios().filter(s => s.id !== id);
+  localStorage.setItem('dw_scenarios', JSON.stringify(scenarios));
+  renderScenarioBar();
+  renderCompareTable();
+}
+
+function renderScenarioBar() {
+  const scenarios  = getSavedScenarios();
+  const pills      = document.getElementById('scenarioPills');
+  const compareBtn = document.getElementById('compareBtn');
+  if (!pills) return;
+
+  if (scenarios.length === 0) {
+    pills.innerHTML = '<span class="scenario-hint">No saved scenarios yet — configure inputs and click Save Scenario</span>';
+  } else {
+    pills.innerHTML = scenarios.map(s => `
+      <div class="scenario-pill" title="Saved ${s.savedAt}">
+        <span class="sp-name" onclick="loadScenario(${s.id})">${s.name}</span>
+        <button class="sp-del" onclick="deleteScenario(${s.id})">&#x2715;</button>
+      </div>`).join('');
+  }
+  if (compareBtn) compareBtn.style.display = scenarios.length >= 2 ? 'inline-flex' : 'none';
+}
+
+function promptSaveScenario() {
+  const modal = document.getElementById('saveModal');
+  const input = document.getElementById('scenarioNameInput');
+  modal.style.display = 'flex';
+  input.value = '';
+  setTimeout(() => input.focus(), 50);
+}
+
+function confirmSave() {
+  const name = document.getElementById('scenarioNameInput').value.trim();
+  if (!name) return;
+  saveScenario(name);
+  document.getElementById('saveModal').style.display = 'none';
+}
+
+function cancelSave() {
+  document.getElementById('saveModal').style.display = 'none';
+}
+
+// Keyboard shortcuts for modal
+document.addEventListener('keydown', e => {
+  const modal = document.getElementById('saveModal');
+  if (!modal || modal.style.display === 'none') return;
+  if (e.key === 'Enter')  confirmSave();
+  if (e.key === 'Escape') cancelSave();
+});
+
+// ------------------------------------------------------------
+// SCENARIO COMPARE TABLE
+// ------------------------------------------------------------
+
+function renderCompareTable() {
+  const scenarios = getSavedScenarios();
+  const card = document.getElementById('compareCard');
+  const wrap = document.getElementById('compareTableWrap');
+  if (!card || !wrap) return;
+
+  if (scenarios.length < 2) { card.style.display = 'none'; return; }
+  card.style.display = 'block';
+
+  const data = scenarios.map(s => {
+    const results  = calculateAll(s.inputs, s.financeOptions, s.leaseOptions);
+    const best     = results.reduce((a, b) => b.netPosition > a.netPosition ? b : a);
+    const bestMo   = results.reduce((a, b) => b.monthlyEquiv < a.monthlyEquiv ? b : a);
+    const bestFin  = results.filter(r => r.type === 'finance').reduce((a, b) => (!a || b.netPosition > a.netPosition) ? b : a, null);
+    const bestLease= results.filter(r => r.type === 'lease').reduce((a, b) => (!a || b.netPosition > a.netPosition) ? b : a, null);
+    const cashNew  = results.find(r => r.key === 'cashNew');
+    const cashUsed = results.find(r => r.key === 'cashUsed');
+    return { s, best, bestMo, bestFin, bestLease, cashNew, cashUsed };
+  });
+
+  const n       = data.length;
+  const maxNet  = Math.max(...data.map(d => d.best.netPosition));
+  const minMo   = Math.min(...data.map(d => d.bestMo.monthlyEquiv));
+
+  const cols = data.map(d => `<th class="ct-col">${d.s.name}<br><span class="ct-date">${d.s.savedAt}</span></th>`).join('');
+
+  function cell(val, isBest, color) {
+    return `<td class="ct-cell ${isBest ? 'ct-best' : ''}" ${color ? `style="color:${color}"` : ''}>${val}</td>`;
+  }
+
+  const tbody = `
+    <tr class="ct-section-hdr"><td colspan="${n+1}">Best Overall</td></tr>
+    <tr>
+      <td class="ct-label">Best Option</td>
+      ${data.map(d => cell(d.best.label, false, d.best.color)).join('')}
+    </tr>
+    <tr>
+      <td class="ct-label">Best Net Position</td>
+      ${data.map(d => cell(`<strong>${fmt$(d.best.netPosition)}</strong>`, d.best.netPosition === maxNet)).join('')}
+    </tr>
+    <tr>
+      <td class="ct-label">Lowest Monthly</td>
+      ${data.map(d => cell(`${fmt$dec(d.bestMo.monthlyEquiv)}<br><span class="ct-sub">${d.bestMo.shortLabel}</span>`, d.bestMo.monthlyEquiv === minMo)).join('')}
+    </tr>
+    <tr class="ct-section-hdr"><td colspan="${n+1}">Net Position by Option Type</td></tr>
+    <tr>
+      <td class="ct-label">Pay Cash — New</td>
+      ${data.map(d => cell(fmt$(d.cashNew.netPosition), false)).join('')}
+    </tr>
+    <tr>
+      <td class="ct-label">Cash — Used</td>
+      ${data.map(d => cell(fmt$(d.cashUsed.netPosition), false)).join('')}
+    </tr>
+    <tr>
+      <td class="ct-label">Best Finance</td>
+      ${data.map(d => d.bestFin
+        ? cell(`${fmt$(d.bestFin.netPosition)}<br><span class="ct-sub">${d.bestFin.shortLabel}</span>`, false)
+        : '<td class="ct-cell ct-muted">—</td>').join('')}
+    </tr>
+    <tr>
+      <td class="ct-label">Best Lease</td>
+      ${data.map(d => d.bestLease
+        ? cell(`${fmt$(d.bestLease.netPosition)}<br><span class="ct-sub">${d.bestLease.shortLabel}</span>`, false)
+        : '<td class="ct-cell ct-muted">—</td>').join('')}
+    </tr>
+  `;
+
+  wrap.innerHTML = `
+    <div class="compare-scroll">
+      <table class="compare-table">
+        <thead><tr><th class="ct-label">Metric</th>${cols}</tr></thead>
+        <tbody>${tbody}</tbody>
+      </table>
+    </div>
+    <p class="compare-note">Click a scenario pill to load it into the calculator. <strong style="color:var(--green)">Green</strong> = best value in that row.</p>
+  `;
+}
+
+// ------------------------------------------------------------
+// AUTO-SAVE / RESTORE SESSION
+// ------------------------------------------------------------
+
+function autoSaveSession() {
+  try {
+    localStorage.setItem('dw_session', JSON.stringify({
+      inputs: getInputs(), financeOptions, leaseOptions,
+    }));
+  } catch {}
+}
+
+function restoreSession() {
+  try {
+    const saved = JSON.parse(localStorage.getItem('dw_session') || 'null');
+    if (!saved) return;
+    Object.entries(saved.inputs).forEach(([key, val]) => {
+      const el = document.getElementById(key);
+      if (el) el.value = val;
+    });
+    if (saved.financeOptions?.length > 0) {
+      financeOptions = saved.financeOptions;
+      nextFinId = Math.max(...financeOptions.map(o => o.id), 0) + 1;
+    }
+    if (saved.leaseOptions?.length > 0) {
+      leaseOptions = saved.leaseOptions;
+      nextLeaseId = Math.max(...leaseOptions.map(o => o.id), 0) + 1;
+    }
+    const rateVal = saved.inputs.investReturn;
+    document.querySelectorAll('.scen-btn').forEach(btn => {
+      btn.classList.toggle('active', parseFloat(btn.dataset.rate) === rateVal);
+    });
+  } catch {}
+}
+
+// ------------------------------------------------------------
 // SCENARIO BUTTONS
 // ------------------------------------------------------------
 
@@ -718,6 +975,7 @@ function update() {
   initCharts(results);
   renderNetBreakdown(results);
   renderAmortSection(results);
+  autoSaveSession();
 }
 
 // ------------------------------------------------------------
@@ -725,8 +983,11 @@ function update() {
 // ------------------------------------------------------------
 
 document.addEventListener('DOMContentLoaded', () => {
+  restoreSession();
   renderFinanceInputs();
   renderLeaseInputs();
+  renderScenarioBar();
+  renderCompareTable();
 
   document.getElementById('investReturn').addEventListener('input', () => {
     const val = parseFloat(document.getElementById('investReturn').value);

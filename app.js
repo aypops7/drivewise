@@ -337,8 +337,8 @@ function renderLeaseInputs() {
 // ------------------------------------------------------------
 
 function addFinOpt() {
-  const n = financeOptions.length + 1;
-  financeOptions.push({ id: nextFinId++, name: `Finance Option ${n}`, downPayment: 5000, loanAPR: 6.5, loanTermMonths: 60 });
+  const apr = 6.5, term = 60;
+  financeOptions.push({ id: nextFinId++, name: `Finance ${apr}% / ${term}mo`, downPayment: 5000, loanAPR: apr, loanTermMonths: term });
   renderFinanceInputs();
   update();
 }
@@ -355,8 +355,8 @@ function updateFinOpt(id, field, value) {
 }
 
 function addLeaseOpt() {
-  const n = leaseOptions.length + 1;
-  leaseOptions.push({ id: nextLeaseId++, name: `Lease Option ${n}`, leaseMonthly: 499, dueAtSigning: 3000, leaseTermMonths: 36, leaseEndFee: 395, excessMileage: 1200 });
+  const monthly = 499, term = 36;
+  leaseOptions.push({ id: nextLeaseId++, name: `Lease $${monthly}/mo ${term}mo`, leaseMonthly: monthly, dueAtSigning: 3000, leaseTermMonths: term, leaseEndFee: 395, excessMileage: 1200 });
   renderLeaseInputs();
   update();
 }

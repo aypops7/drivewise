@@ -389,34 +389,22 @@
 
 <!-- Education Tab Content -->
 <div id="educationPanel" style="display:none;">
-  <div class="edu-page">
+  <div class="results-col">
 
-    <!-- Hero -->
-    <div class="edu-hero">
-      <div class="edu-hero-inner">
-        <div class="edu-hero-tag">DriveWise Education</div>
-        <h1 class="edu-hero-title">Stop Optimizing for the Monthly Payment</h1>
-        <p class="edu-hero-sub">The car salesman asks "what can you afford per month?" That's the wrong question. The right question is: <strong>which option leaves you wealthiest after 5 years?</strong> This guide teaches you how to think about it.</p>
+    <!-- The Big Idea -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon navy">&#x1F9E0;</div>
+        <span class="card-title">The Big Idea — Monthly Payment vs. Wealth Over Time</span>
       </div>
-    </div>
-
-    <!-- Section 1: The Big Idea -->
-    <div class="edu-section">
-      <div class="edu-section-inner">
-        <div class="edu-section-label">The Big Idea</div>
-        <h2 class="edu-section-title">Monthly Payment vs. Wealth Over Time</h2>
-        <p class="edu-body">Most people pick a car the same way: they walk into a dealership, say they want to stay "under $500/month," and the salesperson works backwards from there — stretching the loan to 84 months, burying fees, or structuring a lease that looks cheap but costs more in the long run.</p>
-        <p class="edu-body">This is a trap. A low monthly payment does not mean a low total cost. It just means the cost is being spread out or hidden elsewhere.</p>
-
+      <div class="card-body">
+        <p class="edu-body">Most people pick a car by telling a dealer "I want to stay under $500/month." The salesperson works backwards — stretching the loan to 84 months, burying fees, or structuring a lease that looks cheap but costs more in the long run.</p>
+        <p class="edu-body">This is a trap. A low monthly payment does not mean a low total cost. It just means the cost is spread out or hidden elsewhere.</p>
         <div class="edu-callout callout-warning">
           <div class="callout-icon">&#x26A0;&#xFE0F;</div>
-          <div>
-            <strong>Example:</strong> A $40,000 car financed at 8% for 84 months costs $622/month. The same car at 60 months costs $811/month. The shorter loan feels more expensive — but you pay $6,400 less in interest and own the car sooner. "Lower monthly" cost you more.
-          </div>
+          <div><strong>Example:</strong> A $40,000 car at 8% for 84 months costs $622/month. The same car at 60 months costs $811/month. The shorter loan feels more expensive — but you pay $6,400 less in interest and own the car sooner. "Lower monthly" cost you more.</div>
         </div>
-
-        <p class="edu-body">DriveWise flips the question. Instead of "what's the cheapest monthly payment?", we ask: <strong>after X years, which option leaves you with the most money?</strong> That means accounting for every dollar you spend — including the dollars you <em>could have invested</em> but didn't.</p>
-
+        <p class="edu-body" style="margin-bottom:1rem;">DriveWise flips the question. Instead of the cheapest monthly payment, we ask: <strong>after X years, which option leaves you with the most money?</strong></p>
         <div class="edu-two-col">
           <div class="edu-vs-card bad">
             <div class="edu-vs-label">&#x274C; Wrong Question</div>
@@ -426,379 +414,283 @@
           <div class="edu-vs-card good">
             <div class="edu-vs-label">&#x2705; Right Question</div>
             <div class="edu-vs-text">"Which option leaves me wealthiest after 5 years?"</div>
-            <div class="edu-vs-sub">Accounts for all costs, investment growth on unspent cash, and resale value at the end. This is what DriveWise calculates.</div>
+            <div class="edu-vs-sub">Accounts for all costs, investment growth on unspent cash, and resale value. This is what DriveWise calculates.</div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Section 1b: Your Three Options -->
-    <div class="edu-section edu-section-alt">
-      <div class="edu-section-inner">
-        <div class="edu-section-label">Your Three Options</div>
-        <h2 class="edu-section-title">Cash, Finance, or Lease — What's the Difference?</h2>
-        <p class="edu-body">Every car acquisition boils down to one of three approaches. Each has a different math, a different relationship with your savings, and a different set of trade-offs. Here's how to think about them.</p>
-
-        <!-- Cash Purchase -->
-        <div class="edu-option-block">
-          <div class="edu-option-block-header cash">
-            <div class="edu-option-block-icon">&#x1F4B5;</div>
-            <div>
-              <div class="edu-option-block-title">Cash Purchase</div>
-              <div class="edu-option-block-sub">Pay the full price upfront. No lender, no monthly payment.</div>
-            </div>
-          </div>
-          <div class="edu-option-block-body">
-            <div class="edu-option-block-cols">
-              <div>
-                <div class="edu-pros-cons-title pros">Pros</div>
-                <ul class="edu-pc-list pros">
-                  <li>Zero interest — you pay exactly what the car costs</li>
-                  <li>No monthly payment obligation</li>
-                  <li>You own the car outright immediately</li>
-                  <li>Full resale value is yours when you sell</li>
-                </ul>
-              </div>
-              <div>
-                <div class="edu-pros-cons-title cons">Cons</div>
-                <ul class="edu-pc-list cons">
-                  <li>Large cash outflow on day one — depletes savings fast</li>
-                  <li>High opportunity cost: that money can't compound</li>
-                  <li>Worst option when investment returns are high</li>
-                </ul>
-              </div>
-            </div>
-            <div class="edu-math-box">
-              <div class="edu-math-title">&#x1F9EE; The Math</div>
-              <div class="edu-math-body">
-                <p>You pay: <strong>Car Price × (1 + Sales Tax) + Fees</strong> upfront. No future loan payments.</p>
-                <p>Your remaining cash (<em>Savings − Purchase Price</em>) stays invested and grows as: <strong>Remaining Cash × (1 + r)ⁿ</strong></p>
-                <div class="edu-math-example">
-                  <strong>Example:</strong> $45,000 car, $50,000 in savings, 7% return, 5 years.<br>
-                  Upfront cost ≈ $49,575 (with tax + fees). Remaining invested: $425.<br>
-                  Investment grows to: ~$596. You also get back ~$22,000 resale.<br>
-                  <strong>Compare that to financing below — the gap is your opportunity cost.</strong>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Finance -->
-        <div class="edu-option-block">
-          <div class="edu-option-block-header finance">
-            <div class="edu-option-block-icon">&#x1F3E6;</div>
-            <div>
-              <div class="edu-option-block-title">Finance (Auto Loan)</div>
-              <div class="edu-option-block-sub">Put money down, borrow the rest from a lender, repay monthly with interest.</div>
-            </div>
-          </div>
-          <div class="edu-option-block-body">
-            <div class="edu-option-block-cols">
-              <div>
-                <div class="edu-pros-cons-title pros">Pros</div>
-                <ul class="edu-pc-list pros">
-                  <li>Keeps more cash invested and compounding</li>
-                  <li>Can beat cash if your investment return &gt; loan APR</li>
-                  <li>You own the car and get full resale value</li>
-                  <li>Spreads cost over time — predictable payments</li>
-                </ul>
-              </div>
-              <div>
-                <div class="edu-pros-cons-title cons">Cons</div>
-                <ul class="edu-pc-list cons">
-                  <li>Interest adds cost — typically $3,000–$10,000+ over the loan</li>
-                  <li>Longer terms = lower payments but far more interest</li>
-                  <li>You're underwater early (owe more than it's worth)</li>
-                </ul>
-              </div>
-            </div>
-            <div class="edu-math-box">
-              <div class="edu-math-title">&#x1F9EE; The Math</div>
-              <div class="edu-math-body">
-                <p><strong>Monthly payment</strong> is calculated using standard amortization:</p>
-                <code class="edu-formula">PMT = Principal × r × (1+r)ⁿ / ((1+r)ⁿ − 1)</code>
-                <p>Where <em>r</em> = monthly rate (APR ÷ 12), <em>n</em> = loan term in months. Your down payment + taxes + fees leave your savings on day one. The rest stays invested.</p>
-                <div class="edu-math-example">
-                  <strong>Example:</strong> $5,000 down on a $45,000 car at 6.5% APR, 60 months.<br>
-                  Monthly payment: ~$781. Total interest paid: ~$2,860.<br>
-                  But $45,000 stays invested at 7% → grows to ~$63,000 over 5 years.<br>
-                  <strong>The $18,000 investment growth easily outpaces the $2,860 in interest.</strong>
-                </div>
-              </div>
-            </div>
-            <div class="edu-insight-box">
-              <div class="edu-insight-icon">&#x1F4A1;</div>
-              <div><strong>The key question:</strong> Is your expected investment return higher or lower than your loan APR? If you can earn 7% investing but your loan costs 5%, keeping cash invested wins. If your loan is 9% and markets are flat, paying cash wins. DriveWise shows you this trade-off live.</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Lease -->
-        <div class="edu-option-block">
-          <div class="edu-option-block-header lease">
-            <div class="edu-option-block-icon">&#x1F4CB;</div>
-            <div>
-              <div class="edu-option-block-title">Lease</div>
-              <div class="edu-option-block-sub">Pay for the use of the car for a set term. Return it at the end. No ownership.</div>
-            </div>
-          </div>
-          <div class="edu-option-block-body">
-            <div class="edu-option-block-cols">
-              <div>
-                <div class="edu-pros-cons-title pros">Pros</div>
-                <ul class="edu-pc-list pros">
-                  <li>Lowest upfront cost — keeps the most cash invested</li>
-                  <li>Lower monthly payments than financing the same car</li>
-                  <li>Drive a newer car every few years</li>
-                  <li>Often covered under warranty for the full term</li>
-                </ul>
-              </div>
-              <div>
-                <div class="edu-pros-cons-title cons">Cons</div>
-                <ul class="edu-pc-list cons">
-                  <li>No ownership — no resale value at the end</li>
-                  <li>Mileage limits with penalty fees for going over</li>
-                  <li>Lease-end fees and wear charges add up</li>
-                  <li>If you always lease, you always have a payment</li>
-                </ul>
-              </div>
-            </div>
-            <div class="edu-math-box">
-              <div class="edu-math-title">&#x1F9EE; The Math</div>
-              <div class="edu-math-body">
-                <p>You pay: <strong>Due at Signing</strong> upfront, then a <strong>fixed monthly payment</strong> for the lease term. At the end, you return the car — no equity recovered.</p>
-                <p>If your horizon is longer than one lease cycle, DriveWise models a second lease automatically (new due-at-signing, same monthly rate).</p>
-                <div class="edu-math-example">
-                  <strong>Example:</strong> $3,500 due at signing, $549/month, 36-month lease, 5-year horizon.<br>
-                  Total payments: $3,500 + ($549 × 60) = $36,440 + end-of-lease fees.<br>
-                  But $46,500 stays invested at 7% → grows to ~$65,000.<br>
-                  <strong>More cash invested is the lease's core financial advantage — offset by zero resale.</strong>
-                </div>
-              </div>
-            </div>
-            <div class="edu-insight-box">
-              <div class="edu-insight-icon">&#x26A0;&#xFE0F;</div>
-              <div><strong>The perpetual payment trap:</strong> Many people lease car after car indefinitely. Because you never build equity, you always need another payment. Owning eventually means a paid-off asset. Leasing means your car costs never end.</div>
-            </div>
-          </div>
-        </div>
-
+    <!-- Cash Purchase -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon indigo">&#x1F4B5;</div>
+        <span class="card-title">Option 1 — Pay Cash</span>
       </div>
-    </div>
-
-    <!-- Section 2: Core Terms -->
-    <div class="edu-section edu-section-alt">
-      <div class="edu-section-inner">
-        <div class="edu-section-label">Core Cost &amp; Decision Terms</div>
-        <h2 class="edu-section-title">What the Numbers Actually Mean</h2>
-        <p class="edu-body">DriveWise shows you several cost figures for each option. Here's what each one means and why it matters.</p>
-
-        <div class="edu-terms-grid">
-
-          <div class="edu-term-card">
-            <div class="edu-term-icon" style="background:#ede9fe; color:#7c3aed">&#x1F4B5;</div>
-            <div class="edu-term-body">
-              <div class="edu-term-name">Upfront Cost</div>
-              <div class="edu-term-def">Money paid immediately at the time of purchase — down payment, sales tax, title, doc fees, and dealer fees.</div>
-              <div class="edu-term-why"><strong>Why it matters:</strong> Every dollar paid upfront is a dollar that can no longer grow in your investment account. A large down payment reduces your loan (good) but also reduces your compounding wealth (bad). The trade-off depends on your loan rate vs. your investment return.</div>
+      <div class="card-body">
+        <p class="edu-body-sm">Pay the full price upfront. No lender, no monthly payment, no interest.</p>
+        <div class="edu-option-block-cols" style="margin-bottom:1rem;">
+          <div>
+            <div class="edu-pros-cons-title pros">Pros</div>
+            <ul class="edu-pc-list pros">
+              <li>Zero interest — you pay exactly what the car costs</li>
+              <li>No monthly payment obligation</li>
+              <li>You own the car outright immediately</li>
+              <li>Full resale value is yours when you sell</li>
+            </ul>
+          </div>
+          <div>
+            <div class="edu-pros-cons-title cons">Cons</div>
+            <ul class="edu-pc-list cons">
+              <li>Large cash outflow on day one — depletes savings fast</li>
+              <li>High opportunity cost: that money can't compound</li>
+              <li>Worst option when investment returns are high</li>
+            </ul>
+          </div>
+        </div>
+        <div class="edu-math-box">
+          <div class="edu-math-title">&#x1F9EE; The Math</div>
+          <div class="edu-math-body">
+            <p>You pay <strong>Car Price × (1 + Sales Tax) + Fees</strong> upfront. Your remaining cash stays invested and grows as <strong>Remaining Cash × (1 + r)ⁿ</strong>.</p>
+            <div class="edu-math-example">
+              <strong>Example:</strong> $45,000 car, $50,000 savings, 7% return, 5 years. Upfront ≈ $49,575. Only $425 left invested → grows to ~$596. Plus ~$22,000 resale back at the end. <strong>Compare to financing: the gap in investment growth is your opportunity cost.</strong>
             </div>
           </div>
-
-          <div class="edu-term-card">
-            <div class="edu-term-icon" style="background:#fef3c7; color:#d97706">&#x1F4CB;</div>
-            <div class="edu-term-body">
-              <div class="edu-term-name">Total Out-of-Pocket</div>
-              <div class="edu-term-def">Every dollar you actually spend over the full horizon: purchase price or lease payments, down payment, loan interest, taxes, fees, insurance, maintenance, and registration.</div>
-              <div class="edu-term-why"><strong>Why it matters:</strong> This is your true cash outflow — no estimates, no tricks. It's the honest answer to "what did this car actually cost me?" Note that it does <em>not</em> subtract resale value or investment growth — those are captured in Net Position instead.</div>
-            </div>
-          </div>
-
-          <div class="edu-term-card">
-            <div class="edu-term-icon" style="background:#d1fae5; color:#059669">&#x1F4C9;</div>
-            <div class="edu-term-body">
-              <div class="edu-term-name">Monthly Equivalent Cost</div>
-              <div class="edu-term-def">Total Out-of-Pocket divided by the number of months in your horizon. This converts lump sums and uneven payments into a single monthly figure.</div>
-              <div class="edu-term-why"><strong>Why it matters:</strong> It lets you compare apples-to-apples. Paying $45,000 cash upfront looks very different from paying $600/month — but Monthly Equivalent Cost puts both on the same scale so you can see which is truly cheaper per month over the full period.</div>
-            </div>
-          </div>
-
-          <div class="edu-term-card">
-            <div class="edu-term-icon" style="background:#fee2e2; color:#dc2626">&#x1F4B8;</div>
-            <div class="edu-term-body">
-              <div class="edu-term-name">Total Interest Paid</div>
-              <div class="edu-term-def">For financed options: the extra money you pay the lender above the original loan amount, over the full loan term.</div>
-              <div class="edu-term-why"><strong>Why it matters:</strong> Interest is the "cost to borrow." On a $35,000 loan at 7% for 60 months, you pay about $6,600 in interest on top of the principal. Whether this is worth it depends on what your investments earn in the meantime — see Opportunity Cost below.</div>
-            </div>
-          </div>
-
-          <div class="edu-term-card">
-            <div class="edu-term-icon" style="background:#e0e7ff; color:#4f46e5">&#x1F3E6;</div>
-            <div class="edu-term-body">
-              <div class="edu-term-name">Resale Value</div>
-              <div class="edu-term-def">The estimated amount you get back when you sell or trade in the car at the end of your horizon. Leased vehicles have zero resale — the car goes back to the dealer.</div>
-              <div class="edu-term-why"><strong>Why it matters:</strong> Resale is equity you recover. A car that cost $45,000 but sells for $22,000 in 5 years effectively "cost" $23,000 in depreciation — not $45,000. Comparing options without resale gives a misleading picture, especially for new vs. used cars.</div>
-            </div>
-          </div>
-
-          <div class="edu-term-card">
-            <div class="edu-term-icon" style="background:#f0fdf4; color:#16a34a">&#x1F3C6;</div>
-            <div class="edu-term-body">
-              <div class="edu-term-name">Ending Net Position</div>
-              <div class="edu-term-def">Your financial position at the end of the horizon: Investment Balance + Resale Value − All Ongoing Costs (− any remaining loan balance).</div>
-              <div class="edu-term-why"><strong>Why it matters:</strong> This is the bottom line. It captures everything — how much your unspent cash grew, what you got back from selling the car, and what it all cost you. <strong>Higher is better.</strong> The option with the best Net Position leaves you the wealthiest.</div>
-            </div>
-          </div>
-
         </div>
       </div>
     </div>
 
-    <!-- Section 3: Opportunity Cost -->
-    <div class="edu-section">
-      <div class="edu-section-inner">
-        <div class="edu-section-label">The Key Insight</div>
-        <h2 class="edu-section-title">Opportunity Cost: The Hidden Cost of Spending Cash</h2>
-        <p class="edu-body">Every dollar you spend on a car is a dollar that <em>can't</em> grow in an investment account. This lost growth is called <strong>opportunity cost</strong> — and it's the most commonly ignored number in car decisions.</p>
+    <!-- Finance -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon amber">&#x1F3E6;</div>
+        <span class="card-title">Option 2 — Finance (Auto Loan)</span>
+      </div>
+      <div class="card-body">
+        <p class="edu-body-sm">Put money down, borrow the rest from a lender, repay monthly with interest. You own the car at the end.</p>
+        <div class="edu-option-block-cols" style="margin-bottom:1rem;">
+          <div>
+            <div class="edu-pros-cons-title pros">Pros</div>
+            <ul class="edu-pc-list pros">
+              <li>Keeps more cash invested and compounding</li>
+              <li>Can beat cash if your investment return &gt; loan APR</li>
+              <li>You own the car and get full resale value</li>
+              <li>Spreads cost over time — predictable payments</li>
+            </ul>
+          </div>
+          <div>
+            <div class="edu-pros-cons-title cons">Cons</div>
+            <ul class="edu-pc-list cons">
+              <li>Interest adds cost — typically $3,000–$10,000+ over the loan</li>
+              <li>Longer terms = lower payments but far more interest paid</li>
+              <li>You're underwater early (owe more than the car is worth)</li>
+            </ul>
+          </div>
+        </div>
+        <div class="edu-math-box">
+          <div class="edu-math-title">&#x1F9EE; The Math</div>
+          <div class="edu-math-body">
+            <p>Monthly payment uses standard amortization:</p>
+            <code class="edu-formula">PMT = Principal × r × (1+r)ⁿ / ((1+r)ⁿ − 1)</code>
+            <p>Where <em>r</em> = APR ÷ 12, <em>n</em> = term in months. Your down payment leaves savings on day one; the rest stays invested.</p>
+            <div class="edu-math-example">
+              <strong>Example:</strong> $5,000 down on $45,000 at 6.5% APR, 60 months. Monthly: ~$781. Total interest: ~$2,860. But $45,000 stays invested at 7% → grows to ~$63,000. <strong>The $18,000 investment gain far outpaces the $2,860 interest cost.</strong>
+            </div>
+          </div>
+        </div>
+        <div class="edu-insight-box" style="margin-top:0.875rem;">
+          <div class="edu-insight-icon">&#x1F4A1;</div>
+          <div><strong>The key question:</strong> Does your investment return beat your loan APR? If you earn 7% investing but borrow at 5%, keeping cash invested wins. If your loan is 9% and markets are flat, paying cash wins. DriveWise models this live.</div>
+        </div>
+      </div>
+    </div>
 
+    <!-- Lease -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon purple">&#x1F4CB;</div>
+        <span class="card-title">Option 3 — Lease</span>
+      </div>
+      <div class="card-body">
+        <p class="edu-body-sm">Pay for the use of the car for a set term. Return it at the end. No ownership, no resale.</p>
+        <div class="edu-option-block-cols" style="margin-bottom:1rem;">
+          <div>
+            <div class="edu-pros-cons-title pros">Pros</div>
+            <ul class="edu-pc-list pros">
+              <li>Lowest upfront cost — keeps the most cash invested</li>
+              <li>Lower monthly payments than financing the same car</li>
+              <li>Drive a newer car every few years</li>
+              <li>Usually covered under warranty for the full term</li>
+            </ul>
+          </div>
+          <div>
+            <div class="edu-pros-cons-title cons">Cons</div>
+            <ul class="edu-pc-list cons">
+              <li>No ownership — zero resale value at the end</li>
+              <li>Mileage limits with fees for going over</li>
+              <li>Lease-end fees and wear charges add up</li>
+              <li>If you always lease, you always have a payment</li>
+            </ul>
+          </div>
+        </div>
+        <div class="edu-math-box">
+          <div class="edu-math-title">&#x1F9EE; The Math</div>
+          <div class="edu-math-body">
+            <p>You pay <strong>Due at Signing</strong> upfront, then a fixed monthly payment. At the end, the car goes back — no equity recovered. DriveWise auto-models a second lease cycle if your horizon exceeds the lease term.</p>
+            <div class="edu-math-example">
+              <strong>Example:</strong> $3,500 due at signing, $549/month, 36-month lease, 5-year horizon. Total payments: $36,440 + fees. But $46,500 stays invested at 7% → grows to ~$65,000. <strong>More cash invested is the lease's advantage — offset by zero resale.</strong>
+            </div>
+          </div>
+        </div>
+        <div class="edu-insight-box" style="margin-top:0.875rem;">
+          <div class="edu-insight-icon">&#x26A0;&#xFE0F;</div>
+          <div><strong>The perpetual payment trap:</strong> Many people lease car after car indefinitely. You never build equity, so you always need the next payment. Owning eventually means a paid-off asset. Leasing means car costs never end.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Opportunity Cost -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon green">&#x1F4C8;</div>
+        <span class="card-title">Opportunity Cost — The Hidden Cost of Spending Cash</span>
+      </div>
+      <div class="card-body">
+        <p class="edu-body">Every dollar spent on a car is a dollar that <em>can't</em> grow in an investment account. This lost growth is <strong>opportunity cost</strong> — the most commonly ignored number in car decisions.</p>
         <div class="edu-callout callout-info">
           <div class="callout-icon">&#x1F4CA;</div>
-          <div>
-            <strong>Example:</strong> You have $50,000 in savings. Option A: pay $45,000 cash for a car. Option B: put $5,000 down, finance the rest. Under Option A, only $5,000 remains invested. Under Option B, $45,000 stays invested and grows. At 7% annually over 5 years, that $45,000 grows to about $63,000. That $18,000 difference is your opportunity cost of paying cash.
-          </div>
+          <div><strong>Example:</strong> You have $50,000. Pay $45,000 cash → only $5,000 remains invested. Finance with $5,000 down → $45,000 stays invested and grows at 7% for 5 years to ~$63,000. That $18,000 difference is your opportunity cost of paying cash.</div>
         </div>
-
-        <p class="edu-body">This doesn't automatically mean financing wins. You're also paying interest on the loan. The real question is: <strong>does your investment return beat your loan rate?</strong></p>
-
+        <p class="edu-body">This doesn't automatically mean financing wins — you're also paying interest. The real question: <strong>does your investment return beat your loan rate?</strong></p>
         <div class="edu-rule-box">
           <div class="edu-rule">
-            <span class="rule-condition">If investment return &gt; loan APR</span>
+            <span class="rule-condition">Investment return &gt; loan APR</span>
             <span class="rule-arrow">→</span>
-            <span class="rule-result">Financing may win — you make more investing than you pay in interest</span>
+            <span class="rule-result">Financing likely wins — investment gains outpace interest cost</span>
           </div>
           <div class="edu-rule">
-            <span class="rule-condition">If investment return &lt; loan APR</span>
+            <span class="rule-condition">Investment return &lt; loan APR</span>
             <span class="rule-arrow">→</span>
-            <span class="rule-result">Paying cash may win — you save more in interest than you'd earn investing</span>
+            <span class="rule-result">Cash may win — interest savings outweigh lost investment growth</span>
           </div>
           <div class="edu-rule">
             <span class="rule-condition">Lease</span>
             <span class="rule-arrow">→</span>
-            <span class="rule-result">Low upfront keeps the most cash invested, but no resale and fees add up fast</span>
+            <span class="rule-result">Lowest upfront = most invested, but zero resale and fees offset the gain</span>
           </div>
         </div>
+        <p class="edu-body" style="margin-top:0.75rem; margin-bottom:0;">Use the <strong>Bear / Base / Bull</strong> buttons in the Calculator to stress-test this. In a low-return environment, cash wins more often than people expect.</p>
+      </div>
+    </div>
 
-        <p class="edu-body">DriveWise calculates this automatically. Use the Bear / Base / Bull buttons to see how different investment return assumptions change the winner — because in a low-return environment, cash wins more often than people think.</p>
-
-        <h3 class="edu-subsection-title">How Each Option Handles Your Cash</h3>
-
-        <div class="edu-option-examples">
-
-          <div class="edu-option-ex">
-            <div class="edu-option-ex-header" style="background:#ede9fe; color:#6d28d9;">
-              <span class="edu-option-ex-icon">&#x1F3E6;</span>
-              <span>Financing Example</span>
-            </div>
-            <div class="edu-option-ex-body">
-              <ul class="edu-option-list">
-                <li>You pay a <strong>down payment + taxes + fees upfront</strong> — that money is gone from your investment account immediately.</li>
-                <li>You make <strong>monthly loan payments</strong>, each split between interest (cost to borrow) and principal (paying down the balance).</li>
-                <li>The cash you <strong>didn't use upfront stays invested</strong> and grows at your expected return over the full horizon.</li>
-                <li>At the end, you <strong>sell the car for its resale value</strong> — that equity comes back to you.</li>
-              </ul>
-              <div class="edu-option-takeaway">
-                <strong>The trade-off:</strong> Interest costs money, but keeping more cash invested earns money. If your investment return beats your loan APR, financing can win on net position.
-              </div>
+    <!-- Key Terms -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon navy">&#x1F4D6;</div>
+        <span class="card-title">Key Terms — What the Numbers Mean</span>
+      </div>
+      <div class="card-body">
+        <div class="edu-terms-grid">
+          <div class="edu-term-card">
+            <div class="edu-term-icon" style="background:#ede9fe; color:#7c3aed">&#x1F4B5;</div>
+            <div class="edu-term-body">
+              <div class="edu-term-name">Upfront Cost</div>
+              <div class="edu-term-def">Money paid immediately — down payment, sales tax, title, doc fees, and dealer fees.</div>
+              <div class="edu-term-why"><strong>Why it matters:</strong> Every dollar paid upfront can no longer compound. A large down payment reduces your loan but also reduces your invested wealth. The trade-off depends on your loan rate vs. investment return.</div>
             </div>
           </div>
-
-          <div class="edu-option-ex">
-            <div class="edu-option-ex-header" style="background:#f3e8ff; color:#7c3aed;">
-              <span class="edu-option-ex-icon">&#x1F4CB;</span>
-              <span>Leasing Example</span>
-            </div>
-            <div class="edu-option-ex-body">
-              <ul class="edu-option-list">
-                <li>You pay a <strong>lower upfront cost</strong> (due at signing) — less cash leaves your investment account on day one.</li>
-                <li>You make a <strong>fixed monthly lease payment</strong> for the lease term. Payments are typically lower than loan payments for the same car.</li>
-                <li><strong>More of your savings stays invested</strong> for longer, compounding throughout the horizon.</li>
-                <li>At the end, the car goes back to the dealer — <strong>no resale value</strong> for you. You may also owe excess mileage or wear fees.</li>
-              </ul>
-              <div class="edu-option-takeaway">
-                <strong>The trade-off:</strong> Lower payments and more cash invested, but zero equity at the end. Great if you value flexibility; costly if you'd rather build ownership.
-              </div>
+          <div class="edu-term-card">
+            <div class="edu-term-icon" style="background:#fef3c7; color:#d97706">&#x1F4CB;</div>
+            <div class="edu-term-body">
+              <div class="edu-term-name">Total Out-of-Pocket</div>
+              <div class="edu-term-def">Every dollar spent over the full horizon: purchase price or lease payments, interest, taxes, fees, insurance, maintenance, and registration.</div>
+              <div class="edu-term-why"><strong>Why it matters:</strong> This is your true cash outflow. It does <em>not</em> subtract resale or investment growth — those are captured in Net Position.</div>
             </div>
           </div>
-
-          <div class="edu-option-ex">
-            <div class="edu-option-ex-header" style="background:#dbeafe; color:#1d4ed8;">
-              <span class="edu-option-ex-icon">&#x1F4B5;</span>
-              <span>Cash Purchase Example</span>
-            </div>
-            <div class="edu-option-ex-body">
-              <ul class="edu-option-list">
-                <li>You pay <strong>full price upfront</strong> — most or all of your savings goes toward the car immediately.</li>
-                <li><strong>No loan interest</strong> — what you see is what you pay.</li>
-                <li>Because so much cash was spent, <strong>very little remains invested</strong> to grow during the horizon. This is the opportunity cost.</li>
-                <li>At the end, you <strong>own the car outright</strong> and recover its resale value when you sell.</li>
-              </ul>
-              <div class="edu-option-takeaway">
-                <strong>The trade-off:</strong> No interest costs, but the highest opportunity cost. Wins when investment returns are low or loan rates are high — and when resale is strong.
-              </div>
+          <div class="edu-term-card">
+            <div class="edu-term-icon" style="background:#d1fae5; color:#059669">&#x1F4C9;</div>
+            <div class="edu-term-body">
+              <div class="edu-term-name">Monthly Equivalent Cost</div>
+              <div class="edu-term-def">Total Out-of-Pocket ÷ months in your horizon. Converts lump sums into a comparable monthly figure.</div>
+              <div class="edu-term-why"><strong>Why it matters:</strong> Lets you compare apples-to-apples across cash, finance, and lease. Paying $45K upfront and paying $600/month are put on the same scale.</div>
             </div>
           </div>
-
+          <div class="edu-term-card">
+            <div class="edu-term-icon" style="background:#fee2e2; color:#dc2626">&#x1F4B8;</div>
+            <div class="edu-term-body">
+              <div class="edu-term-name">Total Interest Paid</div>
+              <div class="edu-term-def">For financed options: extra money paid to the lender above the original loan amount over the full term.</div>
+              <div class="edu-term-why"><strong>Why it matters:</strong> Interest is the cost to borrow. On $35K at 7% for 60 months you pay ~$6,600 extra. Whether that's worth it depends on what your investments earn meanwhile.</div>
+            </div>
+          </div>
+          <div class="edu-term-card">
+            <div class="edu-term-icon" style="background:#e0e7ff; color:#4f46e5">&#x1F697;</div>
+            <div class="edu-term-body">
+              <div class="edu-term-name">Resale Value</div>
+              <div class="edu-term-def">What you get back when you sell or trade in at the end of your horizon. Leased vehicles have zero resale — the car goes back to the dealer.</div>
+              <div class="edu-term-why"><strong>Why it matters:</strong> Resale is equity you recover. A $45K car that sells for $22K in 5 years effectively cost $23K in depreciation, not $45K.</div>
+            </div>
+          </div>
+          <div class="edu-term-card">
+            <div class="edu-term-icon" style="background:#f0fdf4; color:#16a34a">&#x1F3C6;</div>
+            <div class="edu-term-body">
+              <div class="edu-term-name">Ending Net Position</div>
+              <div class="edu-term-def">Investment Balance + Resale Value − Total Ongoing Costs (− remaining loan balance if applicable).</div>
+              <div class="edu-term-why"><strong>Why it matters:</strong> This is the bottom line. It captures everything. <strong>Higher is better.</strong> The option with the best Net Position leaves you the wealthiest.</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- Section 4: How to Use -->
-    <div class="edu-section edu-section-alt">
-      <div class="edu-section-inner">
-        <div class="edu-section-label">Using the Tool</div>
-        <h2 class="edu-section-title">How to Get the Most Out of DriveWise</h2>
-
+    <!-- How to Use -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon green">&#x1F3AF;</div>
+        <span class="card-title">How to Use DriveWise</span>
+      </div>
+      <div class="card-body">
         <div class="edu-steps">
           <div class="edu-step">
             <div class="edu-step-num">1</div>
             <div class="edu-step-body">
               <div class="edu-step-title">Enter the car you're considering</div>
-              <div class="edu-step-desc">Put in the price, estimated resale value at the end of your horizon, and your sales tax and fees. These are usually on the dealer's sheet or on sites like KBB or Edmunds.</div>
+              <div class="edu-step-desc">Put in the price, estimated resale value, and your sales tax and fees. These are on the dealer's sheet or sites like KBB or Edmunds.</div>
             </div>
           </div>
           <div class="edu-step">
             <div class="edu-step-num">2</div>
             <div class="edu-step-body">
               <div class="edu-step-title">Enter how much cash you have available</div>
-              <div class="edu-step-desc">This is your starting savings. Unspent cash is assumed to be invested at your expected return. This is what makes opportunity cost visible.</div>
+              <div class="edu-step-desc">This is your starting savings. Unspent cash is assumed to be invested at your expected return — this is what makes opportunity cost visible.</div>
             </div>
           </div>
           <div class="edu-step">
             <div class="edu-step-num">3</div>
             <div class="edu-step-body">
               <div class="edu-step-title">Add your financing and lease options</div>
-              <div class="edu-step-desc">Add each loan offer (APR + term) or lease deal (monthly payment + due at signing) you're comparing. You can add multiple options side by side.</div>
+              <div class="edu-step-desc">Add each loan offer (APR + term) or lease deal (monthly + due at signing) you're comparing. You can add multiple options side by side.</div>
             </div>
           </div>
           <div class="edu-step">
             <div class="edu-step-num">4</div>
             <div class="edu-step-body">
               <div class="edu-step-title">Save as a scenario, then compare cars</div>
-              <div class="edu-step-desc">Hit "Save Scenario" to lock in this car (e.g. "Honda Accord"). Then change the price, resale, and terms to a different car and save again (e.g. "Toyota Camry"). Click Compare to see them side by side.</div>
+              <div class="edu-step-desc">Hit "Save Scenario" to lock in a car (e.g. "Honda Accord"). Change the inputs for a different car, save again ("Toyota Camry"), then click Compare to see them side by side.</div>
             </div>
           </div>
           <div class="edu-step">
             <div class="edu-step-num">5</div>
             <div class="edu-step-body">
               <div class="edu-step-title">Look at Net Position, not monthly payment</div>
-              <div class="edu-step-desc">The option with the highest Ending Net Position leaves you the wealthiest. Use the Bear / Base / Bull buttons to stress-test your assumptions before deciding.</div>
+              <div class="edu-step-desc">The option with the highest Ending Net Position leaves you the wealthiest. Use Bear / Base / Bull to stress-test your assumptions before deciding.</div>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-  </div><!-- /edu-page -->
+  </div><!-- /results-col -->
+  </main>
 </div>
 
 <footer class="footer">

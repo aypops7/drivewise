@@ -419,6 +419,53 @@
       </div>
     </div>
 
+    <!-- How to Use -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon green">&#x1F3AF;</div>
+        <span class="card-title">How to Use DriveWise</span>
+      </div>
+      <div class="card-body">
+        <div class="edu-steps">
+          <div class="edu-step">
+            <div class="edu-step-num">1</div>
+            <div class="edu-step-body">
+              <div class="edu-step-title">Enter the car you're considering</div>
+              <div class="edu-step-desc">Put in the price, estimated resale value at end of horizon, and your sales tax and fees. Check KBB or Edmunds for resale estimates.</div>
+            </div>
+          </div>
+          <div class="edu-step">
+            <div class="edu-step-num">2</div>
+            <div class="edu-step-body">
+              <div class="edu-step-title">Enter your available cash</div>
+              <div class="edu-step-desc">This is your starting savings. Unspent cash is assumed invested at your expected return — this is what makes opportunity cost visible.</div>
+            </div>
+          </div>
+          <div class="edu-step">
+            <div class="edu-step-num">3</div>
+            <div class="edu-step-body">
+              <div class="edu-step-title">Add your financing and lease offers</div>
+              <div class="edu-step-desc">Add each loan offer (APR + term) or lease deal (monthly + due at signing). Multiple options can be compared side by side.</div>
+            </div>
+          </div>
+          <div class="edu-step">
+            <div class="edu-step-num">4</div>
+            <div class="edu-step-body">
+              <div class="edu-step-title">Save as a scenario, then compare cars</div>
+              <div class="edu-step-desc">Save this setup as "Honda Accord." Then re-enter values for a "Toyota Camry" and save again. Click Compare to see them side by side.</div>
+            </div>
+          </div>
+          <div class="edu-step">
+            <div class="edu-step-num">5</div>
+            <div class="edu-step-body">
+              <div class="edu-step-title">Focus on Net Position, not monthly payment</div>
+              <div class="edu-step-desc">The highest Ending Net Position wins. Run the Bear / Base / Bull scenarios to see how sensitive your decision is to market conditions.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Three Options side by side -->
     <div class="card">
       <div class="card-header">
@@ -591,6 +638,58 @@
           </div>
         </div>
 
+        <h4 class="edu-subsection-title">Example — $40,000 Loan at 6.5% APR, 60 Months</h4>
+        <div class="amort-table-scroll" style="margin-bottom:1.25rem;">
+          <table class="amort-table edu-amort-example">
+            <thead>
+              <tr>
+                <th>Year</th>
+                <th>Beg. Balance</th>
+                <th>Annual Pmt</th>
+                <th class="amort-principal">Principal</th>
+                <th class="amort-interest">Interest</th>
+                <th>End Balance</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td><td>$40,000</td><td>$9,328</td>
+                <td class="amort-principal">$6,752</td>
+                <td class="amort-interest">$2,576</td>
+                <td>$33,248</td>
+              </tr>
+              <tr>
+                <td>2</td><td>$33,248</td><td>$9,328</td>
+                <td class="amort-principal">$7,197</td>
+                <td class="amort-interest">$2,131</td>
+                <td>$26,051</td>
+              </tr>
+              <tr class="edu-amort-horizon">
+                <td>3 ← horizon end</td><td>$26,051</td><td>$9,328</td>
+                <td class="amort-principal">$7,672</td>
+                <td class="amort-interest">$1,656</td>
+                <td>$18,379</td>
+              </tr>
+              <tr style="opacity:0.4;">
+                <td>4</td><td>$18,379</td><td>$9,328</td>
+                <td class="amort-principal">$8,179</td>
+                <td class="amort-interest">$1,149</td>
+                <td>$10,200</td>
+              </tr>
+              <tr style="opacity:0.4;">
+                <td>5</td><td>$10,200</td><td>$9,328</td>
+                <td class="amort-principal">$8,718</td>
+                <td class="amort-interest">$610</td>
+                <td>$0</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="edu-callout callout-info" style="margin-bottom:1.25rem;">
+          <div class="callout-icon">&#x1F4CA;</div>
+          <div>Notice how in Year 1, <strong style="color:#ef4444">$2,576 goes to interest</strong> vs. only <strong style="color:#6366f1">$6,752 to principal</strong>. By Year 5 that flips completely — almost all goes to principal. The faded rows (Years 4–5) show what the loan looks like past your 3-year horizon. If you sell in Year 3, you still owe <strong>$18,379</strong> — check this against your car's resale value to see if you'd be underwater.</div>
+        </div>
+
         <h4 class="edu-subsection-title">How to Use It</h4>
         <div class="edu-amort-tips">
           <div class="edu-amort-tip">
@@ -667,53 +766,6 @@
               <div class="edu-term-name">Ending Net Position</div>
               <div class="edu-term-def">Investment Balance + Resale Value − Total Ongoing Costs (− remaining loan balance if applicable).</div>
               <div class="edu-term-why"><strong>Why it matters:</strong> The bottom line. Captures everything. <strong>Higher is better.</strong> The option with the best Net Position leaves you the wealthiest.</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- How to Use -->
-    <div class="card">
-      <div class="card-header">
-        <div class="card-icon green">&#x1F3AF;</div>
-        <span class="card-title">How to Use DriveWise</span>
-      </div>
-      <div class="card-body">
-        <div class="edu-steps">
-          <div class="edu-step">
-            <div class="edu-step-num">1</div>
-            <div class="edu-step-body">
-              <div class="edu-step-title">Enter the car you're considering</div>
-              <div class="edu-step-desc">Put in the price, estimated resale value at end of horizon, and your sales tax and fees. Check KBB or Edmunds for resale estimates.</div>
-            </div>
-          </div>
-          <div class="edu-step">
-            <div class="edu-step-num">2</div>
-            <div class="edu-step-body">
-              <div class="edu-step-title">Enter your available cash</div>
-              <div class="edu-step-desc">This is your starting savings. Unspent cash is assumed invested at your expected return — this is what makes opportunity cost visible.</div>
-            </div>
-          </div>
-          <div class="edu-step">
-            <div class="edu-step-num">3</div>
-            <div class="edu-step-body">
-              <div class="edu-step-title">Add your financing and lease offers</div>
-              <div class="edu-step-desc">Add each loan offer (APR + term) or lease deal (monthly + due at signing). Multiple options can be compared side by side.</div>
-            </div>
-          </div>
-          <div class="edu-step">
-            <div class="edu-step-num">4</div>
-            <div class="edu-step-body">
-              <div class="edu-step-title">Save as a scenario, then compare cars</div>
-              <div class="edu-step-desc">Save this setup as "Honda Accord." Then re-enter values for a "Toyota Camry" and save again. Click Compare to see them side by side.</div>
-            </div>
-          </div>
-          <div class="edu-step">
-            <div class="edu-step-num">5</div>
-            <div class="edu-step-body">
-              <div class="edu-step-title">Focus on Net Position, not monthly payment</div>
-              <div class="edu-step-desc">The highest Ending Net Position wins. Run the Bear / Base / Bull scenarios to see how sensitive your decision is to market conditions.</div>
             </div>
           </div>
         </div>

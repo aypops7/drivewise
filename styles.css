@@ -334,6 +334,10 @@ body {
 }
 
 /* Amortization tips */
+.edu-amort-example { width: 100%; }
+.edu-amort-horizon { background: #eff6ff; font-weight: 600; }
+.edu-amort-horizon td:first-child { color: #1d4ed8; font-size: 0.78rem; }
+
 .edu-amort-tips { display: flex; flex-direction: column; gap: 0.75rem; }
 .edu-amort-tip {
   display: flex;

@@ -75,6 +75,114 @@ body {
   color: var(--white);
   border-bottom-color: #6366f1;
 }
+.tour-trigger-btn {
+  margin-left: auto;
+  background: none;
+  border: 1px solid rgba(99,102,241,0.4);
+  color: rgba(255,255,255,0.6);
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 0.35rem 0.9rem;
+  border-radius: 20px;
+  cursor: pointer;
+  align-self: center;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+  letter-spacing: 0.01em;
+}
+.tour-trigger-btn:hover {
+  color: #fff;
+  border-color: #6366f1;
+  background: rgba(99,102,241,0.12);
+}
+
+/* ── Tour Overlay ── */
+.tour-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  pointer-events: all;
+}
+.tour-spotlight {
+  position: fixed;
+  z-index: 9001;
+  border-radius: 10px;
+  box-shadow: 0 0 0 9999px rgba(0,0,0,0.72);
+  pointer-events: none;
+}
+.tour-tooltip {
+  position: fixed;
+  z-index: 9002;
+  background: #1e293b;
+  border: 1.5px solid #6366f1;
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  width: 300px;
+  color: #f1f5f9;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+  pointer-events: all;
+}
+.tour-tooltip.tour-centered {
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%);
+  width: 380px;
+}
+.tour-progress {
+  font-size: 0.7rem;
+  color: #6366f1;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+}
+.tour-tooltip-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
+.tour-tooltip-body {
+  font-size: 0.84rem;
+  color: #cbd5e1;
+  line-height: 1.55;
+  margin-bottom: 1rem;
+}
+.tour-tooltip-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.tour-btn-next {
+  background: #6366f1;
+  color: #fff;
+  border: none;
+  border-radius: 7px;
+  padding: 0.45rem 1rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.tour-btn-next:hover { background: #4f46e5; }
+.tour-btn-back {
+  background: transparent;
+  color: #94a3b8;
+  border: 1px solid #334155;
+  border-radius: 7px;
+  padding: 0.45rem 0.8rem;
+  font-size: 0.82rem;
+  cursor: pointer;
+}
+.tour-btn-back:hover { color: #cbd5e1; border-color: #475569; }
+.tour-btn-skip {
+  margin-left: auto;
+  background: transparent;
+  color: #64748b;
+  border: none;
+  font-size: 0.78rem;
+  cursor: pointer;
+  padding: 0.45rem 0;
+}
+.tour-btn-skip:hover { color: #94a3b8; }
 
 /* ---- Education Page ---- */
 .edu-page { background: var(--slate-50); }

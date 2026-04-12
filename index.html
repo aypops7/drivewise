@@ -33,6 +33,7 @@
 <div class="tab-bar">
   <button class="tab-btn active" onclick="switchTab('calculator', this)">&#x1F4CA; Car Acquisition Cost Analyzer</button>
   <button class="tab-btn" onclick="switchTab('education', this)">&#x1F393; Education</button>
+  <button class="tour-trigger-btn" onclick="startTour()">&#x1F9ED; Take the Tour</button>
 </div>
 
 <!-- Print-only header (hidden on screen) -->
@@ -80,7 +81,7 @@
   <div class="inputs-row">
 
     <!-- 1. Vehicle Assumptions -->
-    <div class="card">
+    <div class="card" id="tourVehicle">
       <div class="card-header">
         <div class="card-icon indigo">&#x1F697;</div>
         <span class="card-title">Vehicle Assumptions</span>
@@ -134,7 +135,7 @@
     </div>
 
     <!-- 2. Cash & Resale -->
-    <div class="card">
+    <div class="card" id="tourCash">
       <div class="card-header">
         <div class="card-icon green">&#x1F4B0;</div>
         <span class="card-title">Cash &amp; Resale Values</span>
@@ -164,7 +165,7 @@
     </div>
 
     <!-- 3. Financing Options (dynamic) -->
-    <div class="card">
+    <div class="card" id="tourFinance">
       <div class="card-header">
         <div class="card-icon amber">&#x1F3E6;</div>
         <span class="card-title">Financing Options</span>
@@ -176,7 +177,7 @@
     </div>
 
     <!-- 4. Lease Options (dynamic) -->
-    <div class="card">
+    <div class="card" id="tourLease">
       <div class="card-header">
         <div class="card-icon purple">&#x1F4CB;</div>
         <span class="card-title">Lease Options</span>
@@ -223,7 +224,7 @@
     </div>
 
     <!-- 6. Investment Return -->
-    <div class="card">
+    <div class="card" id="tourInvest">
       <div class="card-header">
         <div class="card-icon indigo">&#x1F4C8;</div>
         <span class="card-title">Investment Return Assumptions</span>

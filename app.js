@@ -998,3 +998,153 @@ document.addEventListener('DOMContentLoaded', () => {
 
   update();
 });
+
+// ============================================================
+// GUIDED TOUR
+// ============================================================
+
+const TOUR_STEPS = [
+  {
+    title: 'Welcome to DriveWise 👋',
+    body: 'This quick tour walks you through the calculator so you can compare cash, financing, and leasing side by side — and find which option leaves you the wealthiest. Takes about 60 seconds.',
+    target: null,
+  },
+  {
+    title: '1 — Vehicle Assumptions',
+    body: "Enter the car's price, sales tax, fees, and your horizon (how long you plan to own it). Annual miles feeds the cost-per-mile metric.",
+    target: '#tourVehicle',
+  },
+  {
+    title: '2 — Cash & Resale Values',
+    body: 'Enter your total available savings and what you expect the car to be worth at the end of your horizon. Any cash not spent on the car gets invested — this is where opportunity cost comes in.',
+    target: '#tourCash',
+  },
+  {
+    title: '3 — Financing Options',
+    body: "Click '+ Add' to model an auto loan. Enter APR and term. Add multiple loans (e.g. 48mo vs. 72mo) to compare side by side. DriveWise generates an amortization schedule for each.",
+    target: '#tourFinance',
+  },
+  {
+    title: '4 — Lease Options',
+    body: "Click '+ Add' to model a lease. Enter the monthly payment, amount due at signing, and term. DriveWise auto-models a second lease cycle if your horizon exceeds the lease term.",
+    target: '#tourLease',
+  },
+  {
+    title: '5 — Investment Return',
+    body: 'Bear, Base, and Bull preset market scenarios let you stress-test your decision. This single setting can flip the winner — in a strong market, financing often beats paying cash.',
+    target: '#tourInvest',
+  },
+  {
+    title: '6 — Save & Compare',
+    body: "Configure a car, hit Save Scenario, then change the inputs for a second car and save again. Click Compare to see both head-to-head in one table.",
+    target: '.save-scenario-btn',
+  },
+  {
+    title: "You're all set! 🎉",
+    body: 'Results update live as you type. Check the Education tab any time for definitions, formulas, and plain-English explanations of every concept DriveWise uses.',
+    target: null,
+  },
+];
+
+let _tourStep = 0;
+
+function startTour() {
+  // Switch to calculator tab first
+  const calcBtn = document.querySelector('.tab-btn');
+  if (calcBtn) switchTab('calculator', calcBtn);
+  _tourStep = 0;
+  _renderTourStep();
+}
+
+function _renderTourStep() {
+  _cleanupTour();
+  if (_tourStep >= TOUR_STEPS.length) return;
+
+  const step = TOUR_STEPS[_tourStep];
+  const isFirst = _tourStep === 0;
+  const isLast  = _tourStep === TOUR_STEPS.length - 1;
+
+  // Dim overlay — blocks page interaction during tour
+  const overlay = document.createElement('div');
+  overlay.id = 'tourOverlay';
+  overlay.className = 'tour-overlay';
+  document.body.appendChild(overlay);
+
+  if (!step.target) {
+    // Centered modal step (no spotlight)
+    document.body.appendChild(_buildTooltip(step, isFirst, isLast, true));
+    return;
+  }
+
+  const el = document.querySelector(step.target);
+  if (!el) { _tourNav(1); return; }
+
+  // Scroll element into view instantly, then position everything
+  el.scrollIntoView({ behavior: 'instant', block: 'center' });
+
+  const pad = 10;
+  const rect = el.getBoundingClientRect();
+
+  const spotlight = document.createElement('div');
+  spotlight.id = 'tourSpotlight';
+  spotlight.className = 'tour-spotlight';
+  spotlight.style.cssText = `top:${rect.top - pad}px;left:${rect.left - pad}px;width:${rect.width + pad * 2}px;height:${rect.height + pad * 2}px`;
+  document.body.appendChild(spotlight);
+
+  const tooltip = _buildTooltip(step, isFirst, isLast, false);
+  document.body.appendChild(tooltip);
+
+  // Position tooltip beside/below spotlight
+  const tw = tooltip.offsetWidth || 300;
+  const th = tooltip.offsetHeight || 160;
+  const gap = 14;
+  let top, left;
+
+  if (rect.right + tw + gap + pad < window.innerWidth) {
+    left = rect.right + pad + gap;
+    top  = rect.top + rect.height / 2 - th / 2;
+  } else if (rect.left - tw - gap - pad > 0) {
+    left = rect.left - pad - gap - tw;
+    top  = rect.top + rect.height / 2 - th / 2;
+  } else if (rect.bottom + th + gap + pad < window.innerHeight) {
+    top  = rect.bottom + pad + gap;
+    left = rect.left + rect.width / 2 - tw / 2;
+  } else {
+    top  = rect.top - pad - gap - th;
+    left = rect.left + rect.width / 2 - tw / 2;
+  }
+
+  top  = Math.max(10, Math.min(top,  window.innerHeight - th - 10));
+  left = Math.max(10, Math.min(left, window.innerWidth  - tw - 10));
+
+  tooltip.style.top  = top  + 'px';
+  tooltip.style.left = left + 'px';
+}
+
+function _buildTooltip(step, isFirst, isLast, centered) {
+  const total   = TOUR_STEPS.length;
+  const tooltip = document.createElement('div');
+  tooltip.id        = 'tourTooltip';
+  tooltip.className = 'tour-tooltip' + (centered ? ' tour-centered' : '');
+  tooltip.innerHTML = `
+    <div class="tour-progress">Step ${_tourStep + 1} of ${total}</div>
+    <div class="tour-tooltip-title">${step.title}</div>
+    <div class="tour-tooltip-body">${step.body}</div>
+    <div class="tour-tooltip-actions">
+      ${!isFirst ? '<button class="tour-btn-back" onclick="_tourNav(-1)">← Back</button>' : ''}
+      <button class="tour-btn-next" onclick="_tourNav(1)">${isLast ? 'Done ✓' : 'Next →'}</button>
+      ${!isLast ? '<button class="tour-btn-skip" onclick="_cleanupTour()">Skip tour</button>' : ''}
+    </div>`;
+  return tooltip;
+}
+
+function _tourNav(dir) {
+  _tourStep += dir;
+  _renderTourStep();
+}
+
+function _cleanupTour() {
+  ['tourOverlay', 'tourSpotlight', 'tourTooltip'].forEach(id => {
+    document.getElementById(id)?.remove();
+  });
+}

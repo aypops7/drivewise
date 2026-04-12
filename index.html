@@ -19,7 +19,7 @@
     <div class="logo-icon">&#x1F697;</div>
     <div>
       <div class="logo-name">DriveWise</div>
-      <div class="logo-tagline">Car Acquisition Cost Analyzer</div>
+      <div class="logo-tagline">What is the total financial impact of your car-buying decision?</div>
     </div>
   </div>
   <div class="header-right">
@@ -31,7 +31,7 @@
 
 <!-- Tab Bar -->
 <div class="tab-bar">
-  <button class="tab-btn active" onclick="switchTab('calculator', this)">&#x1F4CA; Calculator</button>
+  <button class="tab-btn active" onclick="switchTab('calculator', this)">&#x1F4CA; Car Acquisition Cost Analyzer</button>
   <button class="tab-btn" onclick="switchTab('education', this)">&#x1F393; Education</button>
 </div>
 
@@ -608,6 +608,98 @@
       </div>
     </div>
 
+    <!-- Key Terms -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon navy">&#x1F4D6;</div>
+        <span class="card-title">Key Terms — What the Numbers Mean</span>
+      </div>
+      <div class="card-body">
+        <div class="edu-terms-grid">
+          <div class="edu-term-card">
+            <div class="edu-term-icon" style="background:#ede9fe; color:#7c3aed">&#x1F4B5;</div>
+            <div class="edu-term-body">
+              <div class="edu-term-name">Upfront Cost</div>
+              <div class="edu-term-def">Money paid immediately — down payment, sales tax, title, doc fees, and dealer fees.</div>
+              <div class="edu-term-why"><strong>Why it matters:</strong> Every dollar paid upfront can no longer compound. A large down payment reduces your loan but also reduces your invested wealth.</div>
+            </div>
+          </div>
+          <div class="edu-term-card">
+            <div class="edu-term-icon" style="background:#fef3c7; color:#d97706">&#x1F4CB;</div>
+            <div class="edu-term-body">
+              <div class="edu-term-name">Total Out-of-Pocket</div>
+              <div class="edu-term-def">Every dollar spent over the full horizon: purchase price, interest, taxes, fees, insurance, maintenance, and registration.</div>
+              <div class="edu-term-why"><strong>Why it matters:</strong> True cash outflow. Does <em>not</em> subtract resale or investment growth — those are in Net Position.</div>
+            </div>
+          </div>
+          <div class="edu-term-card">
+            <div class="edu-term-icon" style="background:#d1fae5; color:#059669">&#x1F4C9;</div>
+            <div class="edu-term-body">
+              <div class="edu-term-name">Monthly Equivalent Cost</div>
+              <div class="edu-term-def">Total Out-of-Pocket ÷ months in your horizon. Converts lump sums into one comparable monthly figure.</div>
+              <div class="edu-term-why"><strong>Why it matters:</strong> Apples-to-apples comparison across cash, finance, and lease on a per-month basis.</div>
+            </div>
+          </div>
+          <div class="edu-term-card">
+            <div class="edu-term-icon" style="background:#fee2e2; color:#dc2626">&#x1F4B8;</div>
+            <div class="edu-term-body">
+              <div class="edu-term-name">Total Interest Paid</div>
+              <div class="edu-term-def">Extra money paid to the lender above the original loan amount over the full term.</div>
+              <div class="edu-term-why"><strong>Why it matters:</strong> $35K at 7% for 60mo = ~$6,600 in interest. Whether it's worth it depends on what your investments earn meanwhile.</div>
+            </div>
+          </div>
+          <div class="edu-term-card">
+            <div class="edu-term-icon" style="background:#e0e7ff; color:#4f46e5">&#x1F697;</div>
+            <div class="edu-term-body">
+              <div class="edu-term-name">Resale Value</div>
+              <div class="edu-term-def">What you recover when you sell or trade in. Leased vehicles return to the dealer — zero resale for you.</div>
+              <div class="edu-term-why"><strong>Why it matters:</strong> A $45K car sold for $22K in 5 years cost you $23K in depreciation, not $45K. Resale changes the whole picture.</div>
+            </div>
+          </div>
+          <div class="edu-term-card">
+            <div class="edu-term-icon" style="background:#f0fdf4; color:#16a34a">&#x1F3C6;</div>
+            <div class="edu-term-body">
+              <div class="edu-term-name">Ending Net Position</div>
+              <div class="edu-term-def">Investment Balance + Resale Value − Total Ongoing Costs (− remaining loan balance if applicable).</div>
+              <div class="edu-term-why"><strong>Why it matters:</strong> The bottom line. Captures everything. <strong>Higher is better.</strong> The option with the best Net Position leaves you the wealthiest.</div>
+            </div>
+          </div>
+          <div class="edu-term-card">
+            <div class="edu-term-icon" style="background:#fff7ed; color:#c2410c">&#x1F6E3;&#xFE0F;</div>
+            <div class="edu-term-body">
+              <div class="edu-term-name">Cost per Mile</div>
+              <div class="edu-term-def">Total Out-of-Pocket ÷ total miles driven over the horizon. Normalizes cost across options regardless of mileage.</div>
+              <div class="edu-term-why"><strong>Why it matters:</strong> A cheaper car driven 50,000 miles can cost less per mile than a "deal" driven 20,000. Makes high-mileage vs. low-mileage scenarios directly comparable.</div>
+            </div>
+          </div>
+          <div class="edu-term-card">
+            <div class="edu-term-icon" style="background:#eff6ff; color:#1d4ed8">&#x1F4C8;</div>
+            <div class="edu-term-body">
+              <div class="edu-term-name">Investment Balance at End</div>
+              <div class="edu-term-def">The projected value of any cash <em>not</em> spent on the car, grown at the Expected Annual Return over the horizon.</div>
+              <div class="edu-term-why"><strong>Why it matters:</strong> Financing keeps more cash invested. That invested balance is real wealth — and it's added into your Net Position.</div>
+            </div>
+          </div>
+          <div class="edu-term-card">
+            <div class="edu-term-icon" style="background:#fefce8; color:#a16207">&#x1F4CA;</div>
+            <div class="edu-term-body">
+              <div class="edu-term-name">Expected Annual Return</div>
+              <div class="edu-term-def">The assumed yearly growth rate on any cash you keep invested instead of spending on the car (e.g., 7% Base, 4% Bear, 10% Bull).</div>
+              <div class="edu-term-why"><strong>Why it matters:</strong> The higher this rate, the more expensive it is to pay cash upfront — because more growth is given up. This is the lever that drives opportunity cost.</div>
+            </div>
+          </div>
+          <div class="edu-term-card">
+            <div class="edu-term-icon" style="background:#f5f3ff; color:#6d28d9">&#x1F4B9;</div>
+            <div class="edu-term-body">
+              <div class="edu-term-name">Inflation Rate (CPI)</div>
+              <div class="edu-term-def">The assumed annual rate at which prices rise over time. DriveWise holds this fixed as a simplifying assumption.</div>
+              <div class="edu-term-why"><strong>Why it matters:</strong> Inflation erodes the real value of fixed payments over time. A $549/mo lease payment is worth less in real terms in year 3 than in year 1.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Amortization -->
     <div class="card">
       <div class="card-header">
@@ -712,65 +804,174 @@
       </div>
     </div>
 
-    <!-- Key Terms -->
+    <!-- Financing Terms -->
     <div class="card">
       <div class="card-header">
-        <div class="card-icon navy">&#x1F4D6;</div>
-        <span class="card-title">Key Terms — What the Numbers Mean</span>
+        <div class="card-icon amber">&#x1F3E6;</div>
+        <span class="card-title">Financing Terms — Understanding Your Auto Loan</span>
       </div>
       <div class="card-body">
         <div class="edu-terms-grid">
           <div class="edu-term-card">
-            <div class="edu-term-icon" style="background:#ede9fe; color:#7c3aed">&#x1F4B5;</div>
+            <div class="edu-term-icon" style="background:#fef3c7; color:#d97706">&#x1F4B0;</div>
             <div class="edu-term-body">
-              <div class="edu-term-name">Upfront Cost</div>
-              <div class="edu-term-def">Money paid immediately — down payment, sales tax, title, doc fees, and dealer fees.</div>
-              <div class="edu-term-why"><strong>Why it matters:</strong> Every dollar paid upfront can no longer compound. A large down payment reduces your loan but also reduces your invested wealth.</div>
+              <div class="edu-term-name">Loan Principal</div>
+              <div class="edu-term-def">The amount actually borrowed — car price minus your down payment. This is what you owe before any interest.</div>
+              <div class="edu-term-why"><strong>Why it matters:</strong> A larger down payment shrinks the principal and total interest paid, but also pulls that cash out of your investment account.</div>
             </div>
           </div>
           <div class="edu-term-card">
-            <div class="edu-term-icon" style="background:#fef3c7; color:#d97706">&#x1F4CB;</div>
+            <div class="edu-term-icon" style="background:#fef3c7; color:#b45309">&#x1F4C5;</div>
             <div class="edu-term-body">
-              <div class="edu-term-name">Total Out-of-Pocket</div>
-              <div class="edu-term-def">Every dollar spent over the full horizon: purchase price, interest, taxes, fees, insurance, maintenance, and registration.</div>
-              <div class="edu-term-why"><strong>Why it matters:</strong> True cash outflow. Does <em>not</em> subtract resale or investment growth — those are in Net Position.</div>
+              <div class="edu-term-name">Loan APR</div>
+              <div class="edu-term-def">Annual Percentage Rate — the yearly interest rate charged on the borrowed amount.</div>
+              <div class="edu-term-why"><strong>Why it matters:</strong> The key comparison to your Expected Annual Return. If APR &lt; return, financing likely wins. If APR &gt; return, cash wins.</div>
             </div>
           </div>
           <div class="edu-term-card">
-            <div class="edu-term-icon" style="background:#d1fae5; color:#059669">&#x1F4C9;</div>
+            <div class="edu-term-icon" style="background:#fef3c7; color:#92400e">&#x23F1;&#xFE0F;</div>
             <div class="edu-term-body">
-              <div class="edu-term-name">Monthly Equivalent Cost</div>
-              <div class="edu-term-def">Total Out-of-Pocket ÷ months in your horizon. Converts lump sums into one comparable monthly figure.</div>
-              <div class="edu-term-why"><strong>Why it matters:</strong> Apples-to-apples comparison across cash, finance, and lease on a per-month basis.</div>
+              <div class="edu-term-name">Loan Term</div>
+              <div class="edu-term-def">The length of the loan in months (e.g., 48, 60, 72). Determines how long you make payments.</div>
+              <div class="edu-term-why"><strong>Why it matters:</strong> A longer term lowers your monthly payment but increases total interest paid. A 48-mo vs. 72-mo loan on the same car can cost $4,000+ more in interest.</div>
             </div>
           </div>
           <div class="edu-term-card">
-            <div class="edu-term-icon" style="background:#fee2e2; color:#dc2626">&#x1F4B8;</div>
+            <div class="edu-term-icon" style="background:#fef3c7; color:#d97706">&#x1F9EE;</div>
             <div class="edu-term-body">
-              <div class="edu-term-name">Total Interest Paid</div>
-              <div class="edu-term-def">Extra money paid to the lender above the original loan amount over the full term.</div>
-              <div class="edu-term-why"><strong>Why it matters:</strong> $35K at 7% for 60mo = ~$6,600 in interest. Whether it's worth it depends on what your investments earn meanwhile.</div>
+              <div class="edu-term-name">Monthly Loan Payment (PMT)</div>
+              <div class="edu-term-def">The fixed monthly amount owed, split between interest and principal each month.</div>
+              <div class="edu-term-why"><strong>Formula:</strong> PMT = P × r(1+r)ⁿ / ((1+r)ⁿ − 1) &nbsp;|&nbsp; P = principal, r = monthly rate, n = months</div>
             </div>
           </div>
           <div class="edu-term-card">
-            <div class="edu-term-icon" style="background:#e0e7ff; color:#4f46e5">&#x1F697;</div>
+            <div class="edu-term-icon" style="background:#fef2f2; color:#b91c1c">&#x2696;&#xFE0F;</div>
             <div class="edu-term-body">
-              <div class="edu-term-name">Resale Value</div>
-              <div class="edu-term-def">What you recover when you sell or trade in. Leased vehicles return to the dealer — zero resale for you.</div>
-              <div class="edu-term-why"><strong>Why it matters:</strong> A $45K car sold for $22K in 5 years cost you $23K in depreciation, not $45K. Resale changes the whole picture.</div>
+              <div class="edu-term-name">Equity (Positive / Negative)</div>
+              <div class="edu-term-def">Positive equity: car value &gt; loan balance. Negative equity ("underwater"): loan balance &gt; car value — common early due to depreciation.</div>
+              <div class="edu-term-why"><strong>Why it matters:</strong> Selling while underwater means covering the gap in cash. Check the amortization End Balance vs. your resale estimate before trading in.</div>
             </div>
           </div>
           <div class="edu-term-card">
-            <div class="edu-term-icon" style="background:#f0fdf4; color:#16a34a">&#x1F3C6;</div>
+            <div class="edu-term-icon" style="background:#fff7ed; color:#c2410c">&#x1F4C9;</div>
             <div class="edu-term-body">
-              <div class="edu-term-name">Ending Net Position</div>
-              <div class="edu-term-def">Investment Balance + Resale Value − Total Ongoing Costs (− remaining loan balance if applicable).</div>
-              <div class="edu-term-why"><strong>Why it matters:</strong> The bottom line. Captures everything. <strong>Higher is better.</strong> The option with the best Net Position leaves you the wealthiest.</div>
+              <div class="edu-term-name">Simple vs. Compound Interest</div>
+              <div class="edu-term-def">Auto loans use <strong>simple interest</strong> — calculated only on the remaining balance, not on previously accrued interest.</div>
+              <div class="edu-term-why"><strong>Why it matters:</strong> Making extra payments goes directly to principal, immediately reducing future interest — a more powerful payoff tool than with compound interest loans.</div>
+            </div>
+          </div>
+          <div class="edu-term-card">
+            <div class="edu-term-icon" style="background:#fff7ed; color:#ea580c">&#x1F4CA;</div>
+            <div class="edu-term-body">
+              <div class="edu-term-name">Loan-to-Value (LTV) Ratio</div>
+              <div class="edu-term-def">Loan amount ÷ car's current value. Higher LTV means you owe more relative to what the car is worth.</div>
+              <div class="edu-term-why"><strong>Why it matters:</strong> Lenders use LTV to assess risk. High LTV = harder to refinance and more exposure to being underwater if the car depreciates quickly.</div>
+            </div>
+          </div>
+          <div class="edu-term-card">
+            <div class="edu-term-icon" style="background:#f0fdf4; color:#15803d">&#x1F504;</div>
+            <div class="edu-term-body">
+              <div class="edu-term-name">Refinancing</div>
+              <div class="edu-term-def">Replacing your existing loan with a new one — usually to secure a lower interest rate or reduce monthly payments.</div>
+              <div class="edu-term-why"><strong>Why it matters:</strong> If rates drop after you finance, refinancing can meaningfully reduce total interest paid over the remaining loan life.</div>
+            </div>
+          </div>
+          <div class="edu-term-card">
+            <div class="edu-term-icon" style="background:#f0fdf4; color:#059669">&#x2714;&#xFE0F;</div>
+            <div class="edu-term-body">
+              <div class="edu-term-name">Prepayment &amp; Prepayment Penalty</div>
+              <div class="edu-term-def">Prepayment: paying extra toward principal before it's due. A prepayment penalty is a fee some lenders charge for paying off a loan early.</div>
+              <div class="edu-term-why"><strong>Why it matters:</strong> Extra payments reduce principal and future interest instantly. Always check your loan agreement for prepayment penalties before paying ahead.</div>
+            </div>
+          </div>
+          <div class="edu-term-card">
+            <div class="edu-term-icon" style="background:#eff6ff; color:#1d4ed8">&#x1F4B8;</div>
+            <div class="edu-term-body">
+              <div class="edu-term-name">Balloon Payment</div>
+              <div class="edu-term-def">A large lump-sum payment due at the end of a loan term, after smaller regular payments. Less common on standard auto loans.</div>
+              <div class="edu-term-why"><strong>Why it matters:</strong> Low monthly payments can hide a large balloon due at the end. Always verify whether a loan has one before signing.</div>
             </div>
           </div>
         </div>
       </div>
     </div>
+
+    <!-- Leasing Terms -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon" style="background:#f3e8ff; color:#7c3aed">&#x1F4CB;</div>
+        <span class="card-title">Leasing Terms — What the Fine Print Means</span>
+      </div>
+      <div class="card-body">
+        <div class="edu-terms-grid">
+          <div class="edu-term-card">
+            <div class="edu-term-icon" style="background:#f3e8ff; color:#7c3aed">&#x1F697;</div>
+            <div class="edu-term-body">
+              <div class="edu-term-name">Residual Value</div>
+              <div class="edu-term-def">The estimated value of the car at the end of the lease term, set by the leasing company. It determines your monthly payment.</div>
+              <div class="edu-term-why"><strong>Why it matters:</strong> Higher residual = lower monthly payment (you're financing less depreciation). It's also the price you'd pay to buy the car at lease end.</div>
+            </div>
+          </div>
+          <div class="edu-term-card">
+            <div class="edu-term-icon" style="background:#f3e8ff; color:#6d28d9">&#x1F4B1;</div>
+            <div class="edu-term-body">
+              <div class="edu-term-name">Money Factor</div>
+              <div class="edu-term-def">The interest rate used in lease calculations, expressed as a small decimal (e.g., 0.00125). Multiply by 2,400 to convert to approximate APR.</div>
+              <div class="edu-term-why"><strong>Why it matters:</strong> Dealers don't always advertise money factor clearly. A money factor of 0.003 = ~7.2% APR — knowing the conversion lets you shop smarter.</div>
+            </div>
+          </div>
+          <div class="edu-term-card">
+            <div class="edu-term-icon" style="background:#f3e8ff; color:#7c3aed">&#x1F3F7;&#xFE0F;</div>
+            <div class="edu-term-body">
+              <div class="edu-term-name">Capitalized Cost (Cap Cost)</div>
+              <div class="edu-term-def">The negotiated price of the car being leased — essentially the purchase price used as the basis for your lease payments.</div>
+              <div class="edu-term-why"><strong>Why it matters:</strong> Like a purchase price, this is negotiable. Lowering cap cost reduces your monthly payment, just like negotiating a lower sale price would.</div>
+            </div>
+          </div>
+          <div class="edu-term-card">
+            <div class="edu-term-icon" style="background:#f3e8ff; color:#9333ea">&#x2B07;&#xFE0F;</div>
+            <div class="edu-term-body">
+              <div class="edu-term-name">Cap Cost Reduction</div>
+              <div class="edu-term-def">An upfront payment (like a down payment) that lowers the capitalized cost and reduces monthly payments.</div>
+              <div class="edu-term-why"><strong>Why it matters:</strong> Unlike a purchase down payment, cap cost reduction on a lease is not recovered if the car is totaled early — it's gone.</div>
+            </div>
+          </div>
+          <div class="edu-term-card">
+            <div class="edu-term-icon" style="background:#fdf2f8; color:#be185d">&#x1F4C4;</div>
+            <div class="edu-term-body">
+              <div class="edu-term-name">Acquisition &amp; Disposition Fees</div>
+              <div class="edu-term-def">Acquisition fee: charged upfront by the leasing company to initiate the lease. Disposition fee: charged at return if you don't buy the car.</div>
+              <div class="edu-term-why"><strong>Why it matters:</strong> These fees add real cost that doesn't appear in the monthly payment — factor them into any lease total cost calculation.</div>
+            </div>
+          </div>
+          <div class="edu-term-card">
+            <div class="edu-term-icon" style="background:#fdf2f8; color:#9d174d">&#x1F6AA;</div>
+            <div class="edu-term-body">
+              <div class="edu-term-name">Early Termination Fee</div>
+              <div class="edu-term-def">A penalty for ending the lease before the agreed term is up. Can be substantial — sometimes equal to several months of remaining payments.</div>
+              <div class="edu-term-why"><strong>Why it matters:</strong> Life changes. If you need to exit a lease early, the fee can dwarf any perceived monthly savings. Know the exit cost before you sign.</div>
+            </div>
+          </div>
+          <div class="edu-term-card">
+            <div class="edu-term-icon" style="background:#fdf2f8; color:#be185d">&#x1F6E1;&#xFE0F;</div>
+            <div class="edu-term-body">
+              <div class="edu-term-name">Gap Insurance</div>
+              <div class="edu-term-def">Covers the difference if the car is totaled and the insurance payout is less than what you still owe on the lease. Often included automatically.</div>
+              <div class="edu-term-why"><strong>Why it matters:</strong> Without gap coverage, you'd owe the remainder of the lease out of pocket after an accident — even with no car to show for it.</div>
+            </div>
+          </div>
+          <div class="edu-term-card">
+            <div class="edu-term-icon" style="background:#fdf2f8; color:#9d174d">&#x1F6D2;</div>
+            <div class="edu-term-body">
+              <div class="edu-term-name">Lease Buyout Option</div>
+              <div class="edu-term-def">The right to purchase the leased car at the end of the term for the pre-set residual value.</div>
+              <div class="edu-term-why"><strong>Why it matters:</strong> If the car's market value at lease end is higher than the residual, buying out is a deal. If lower, you can walk away — that flexibility has real value.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
 
   </div></main>
 </div>

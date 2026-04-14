@@ -1035,8 +1035,18 @@ const TOUR_STEPS = [
     target: '#tourInvest',
   },
   {
-    title: '6 — Save & Compare',
-    body: "Configure a car, hit Save Scenario, then change the inputs for a second car and save again. Click Compare to see both head-to-head in one table.",
+    title: '6 — Recommendation & Results',
+    body: "As you enter inputs, DriveWise instantly calculates the winner. The Recommendation card shows the best option and why — Net Position, monthly cost, and total out-of-pocket for every option.",
+    target: '#tourResults',
+  },
+  {
+    title: '7 — Amortization Schedule',
+    body: "For any financed option, DriveWise generates a full year-by-year amortization table. See exactly how much of each year's payments go to interest vs. principal — and whether you'd be underwater at your horizon.",
+    target: '#amortSection',
+  },
+  {
+    title: '8 — Save & Compare',
+    body: "Configure a car, hit Save Scenario, then change the inputs for a second car and save again. Click Compare to see both head-to-head — best option, net position, lowest monthly, and more.",
     target: '.save-scenario-btn',
   },
   {

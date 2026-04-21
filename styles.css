@@ -1024,6 +1024,50 @@ body {
 .scen-btn.bear.active    { background: var(--red);     border-color: var(--red);     color: var(--white); }
 .scen-btn.bull.active    { background: var(--green);   border-color: var(--green);   color: var(--white); }
 
+/* ---- Real Return Toggle ---- */
+.real-toggle-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.875rem;
+  flex-wrap: wrap;
+}
+.real-toggle-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--slate-500);
+  white-space: nowrap;
+}
+.real-toggle-group {
+  display: flex;
+  border: 1.5px solid var(--slate-200);
+  border-radius: 20px;
+  overflow: hidden;
+}
+.real-toggle-btn {
+  background: none;
+  border: none;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.28rem 0.7rem;
+  cursor: pointer;
+  color: var(--slate-500);
+  transition: background 0.15s, color 0.15s;
+  white-space: nowrap;
+  font-family: inherit;
+}
+.real-toggle-btn:hover { color: var(--indigo); }
+.real-toggle-btn.active { background: var(--indigo); color: var(--white); }
+.effective-rate-note {
+  font-size: 0.69rem;
+  font-weight: 600;
+  color: var(--indigo-dark);
+  background: var(--indigo-light);
+  padding: 0.2rem 0.6rem;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
 /* ---- Disclaimer ---- */
 .disclaimer {
   background: var(--amber-light);

@@ -95,6 +95,29 @@ function fmt$dec(n) {
 const FIN_COLORS   = ['#f59e0b', '#f97316', '#ef4444', '#e11d48'];
 const LEASE_COLORS = ['#8b5cf6', '#a855f7', '#3b82f6', '#06b6d4'];
 
+// Real vs. nominal return toggle
+let useRealReturn = false;
+
+function setReturnMode(mode) {
+  useRealReturn = mode === 'real';
+  document.getElementById('nominalBtn')?.classList.toggle('active', !useRealReturn);
+  document.getElementById('realBtn')?.classList.toggle('active', useRealReturn);
+  update();
+}
+
+function updateEffectiveRateNote() {
+  const note = document.getElementById('effectiveRateNote');
+  if (!note) return;
+  if (useRealReturn) {
+    const inp = getInputs();
+    const eff = Math.max(0, inp.investReturn - inp.cpiRate);
+    note.textContent = `Using ${eff.toFixed(1)}% (${inp.investReturn}% − ${inp.cpiRate}% CPI)`;
+    note.style.display = 'inline';
+  } else {
+    note.style.display = 'none';
+  }
+}
+
 // ------------------------------------------------------------
 // DYNAMIC OPTION STATE
 // ------------------------------------------------------------
@@ -186,10 +209,16 @@ function calculateAll(inp, finOptsOverride, leaseOptsOverride) {
   const finOpts   = finOptsOverride   || financeOptions;
   const leaseOpts = leaseOptsOverride || leaseOptions;
 
+  // Real mode: strip CPI out of the nominal investment return so results
+  // reflect purchasing power rather than future dollar amounts.
+  const effectiveInp = useRealReturn
+    ? { ...inp, investReturn: Math.max(0, inp.investReturn - inp.cpiRate) }
+    : inp;
+
   return [
-    calcCash(inp, shared, hMonths, miles),
-    ...finOpts.map((opt, i)   => calcFinanceOption(inp, opt, FIN_COLORS[i % FIN_COLORS.length], shared, hMonths, miles)),
-    ...leaseOpts.map((opt, i) => calcLeaseOption(inp, opt, LEASE_COLORS[i % LEASE_COLORS.length], shared, hMonths, miles)),
+    calcCash(effectiveInp, shared, hMonths, miles),
+    ...finOpts.map((opt, i)   => calcFinanceOption(effectiveInp, opt, FIN_COLORS[i % FIN_COLORS.length], shared, hMonths, miles)),
+    ...leaseOpts.map((opt, i) => calcLeaseOption(effectiveInp, opt, LEASE_COLORS[i % LEASE_COLORS.length], shared, hMonths, miles)),
   ];
 }
 
@@ -567,13 +596,17 @@ function renderRecommendation(results) {
   `;
 
   const inp = getInputs();
+  const effReturn = useRealReturn ? Math.max(0, inp.investReturn - inp.cpiRate) : inp.investReturn;
+  const retLabel  = useRealReturn
+    ? `${effReturn.toFixed(1)}% real (${inp.investReturn}% nominal − ${inp.cpiRate}% CPI)`
+    : `${inp.investReturn}% nominal`;
   let explanation = '';
   if (rNet.type === 'cash') {
-    explanation = `Paying cash produces the best net position over ${inp.horizonYears} years. No interest charges and a solid resale value make it the most efficient option — particularly because your investment return (${inp.investReturn}%) is below what you'd pay in loan interest.`;
+    explanation = `Paying cash produces the best net position over ${inp.horizonYears} years. No interest charges and a solid resale value make it the most efficient option — particularly because your investment return (${retLabel}) is below what you'd pay in loan interest.`;
   } else if (rNet.type === 'finance') {
-    explanation = `"${rNet.label}" wins because keeping more cash invested at ${inp.investReturn}% outpaces the loan interest. The spread between your investment return and loan rate is doing real work — this is the classic "borrow cheap, invest the difference" trade-off in action.`;
+    explanation = `"${rNet.label}" wins because keeping more cash invested at ${retLabel} outpaces the loan interest. The spread between your investment return and loan rate is doing real work — this is the classic "borrow cheap, invest the difference" trade-off in action.`;
   } else {
-    explanation = `"${rNet.label}" produces the strongest net outcome. Minimal upfront commitment keeps the most cash invested, and the compounding growth outweighs the lack of resale benefit. This typically signals favorable lease terms or a high assumed investment return.`;
+    explanation = `"${rNet.label}" produces the strongest net outcome. Minimal upfront commitment keeps the most cash invested at ${retLabel}, and the compounding growth outweighs the lack of resale benefit.`;
   }
 
   document.getElementById('recExplanation').textContent = explanation;
@@ -971,6 +1004,7 @@ function update() {
   initCharts(results);
   renderNetBreakdown(results);
   renderAmortSection(results);
+  updateEffectiveRateNote();
   autoSaveSession();
 }
 
